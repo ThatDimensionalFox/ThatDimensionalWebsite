@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fox Space</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Gallery images data with relative paths and NSFW flag
+    const galleryImages = [
+      {
+        src: 'images/photo1.jpg', // Replace with image stored in 'images' folder
+        title: 'Artwork Title 1',
+        artist: 'Artist Name 1',
+        artistLink: 'https://artistwebsite1.com',
+        description: 'Description for Artwork 1.',
+        nsfw: false
+      },
+      {
+        src: 'images/photo2.jpg', // Replace with image stored in 'images' folder
+        title: 'Artwork Title 2',
+        artist: 'Artist Name 2',
+        artistLink: 'https://artistwebsite2.com',
+        description: 'Description for Artwork 2.',
+        nsfw: true // Marked as NSFW
+      },
+      {
+        src: 'images/photo3.jpg', // Add more images
+        title: 'Artwork Title 3',
+        artist: 'Artist Name 3',
+        artistLink: 'https://artistwebsite3.com',
+        description: 'Description for Artwork 3.',
+        nsfw: false
+      },
+      // Add more images with nsfw flag as needed
+    ];
+
+    let showNSFW = false; // Track NSFW toggle state
+
+    // Function to generate gallery dynamically with NSFW filter
+    function generateGallery() {
+      // Clear existing content
+      const galleryContainer = document.getElementById('gallery-container');
+      galleryContainer.innerHTML = '';
+
+      // Filter images based on NSFW toggle
+      const imagesToShow = showNSFW ? galleryImages : galleryImages.filter(image => !image.nsfw);
+
+      // Add the gallery images
+      imagesToShow.forEach(image => {
+        const imgDiv = document.createElement('div');
+        imgDiv.className = 'bg-white p-4 rounded shadow hover:scale-105 transition duration-200';
+        
+        imgDiv.innerHTML = `
+          <img src="${image.src}" alt="${image.title}" class="rounded-xl w-full h-48 object-cover mb-4" />
+          <h3 class="font-semibold text-lg">${image.title}</h3>
+          <p class="text-gray-500"><a href="${image.artistLink}" target="_blank" class="text-blue-500 hover:underline">${image.artist}</a></p>
+          <p class="text-gray-600 mt-2">${image.description}</p>
+        `;
+        
+        galleryContainer.appendChild(imgDiv);
+      });
+    }
+
+    // Toggle NSFW images visibility
+    function toggleNSFW() {
+      showNSFW = !showNSFW; // Toggle the state
+      generateGallery(); // Regenerate the gallery with the updated state
+    }
+
+    // Function to switch tabs (Gallery/Files)
+    function switchTab(tabName) {
+      // Hide all tabs
+      document.getElementById('gallery-tab').classList.add('hidden');
+      document.getElementById('files-tab').classList.add('hidden');
+      
+      // Show the selected tab
+      document.getElementById(`${tabName}-tab`).classList.remove('hidden');
+      
+      // Update the active tab button styling
+      const buttons = document.querySelectorAll('.tab-btn');
+      buttons.forEach(btn => btn.classList.remove('bg-blue-500', 'text-white'));
+      
+      document.getElementById(`${tabName}-btn`).classList.add('bg-blue-500', 'text-white');
+    }
+
+    // Initialize page to show gallery by default
+    window.onload = function() {
+      generateGallery();
+      switchTab('gallery'); // Show the gallery by default
+    };
+  </script>
+</head>
+<body class="bg-gray-100 text-gray-900">
+  <!-- Header -->
+  <header class="p-6 text-center bg-white shadow-md">
+    <h1 class="text-3xl font-bold mb-2">Fox Space</h1>
+    <div class="flex flex-col items-center space-y-2">
+      <img src="images/profile.jpg" alt="Profile Picture" class="w-24 h-24 rounded-full border-4 border-blue-500 shadow-md" />
+      <p class="text-gray-700 max-w-xl">Hi, I'm a fox with many dimensions. I build things, post stuff, and occasionally break the simulation.</p>
+    </div>
+  </header>
+
+  <!-- Tab Buttons -->
+  <div class="flex justify-center mt-6 gap-4">
+    <button id="gallery-btn" onclick="switchTab('gallery')" class="tab-btn px-4 py-2 rounded bg-gray-300 text-gray-800">Gallery</button>
+    <button id="files-btn" onclick="switchTab('files')" class="tab-btn px-4 py-2 rounded bg-gray-300 text-gray-800">Files</button>
+  </div>
+
+  <!-- Gallery Tab -->
+  <section id="gallery-tab" class="p-4 hidden">
+    <!-- NSFW Toggle -->
+    <div class="flex justify-center mb-4">
+      <button onclick="toggleNSFW()" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+        Toggle NSFW
+      </button>
+    </div>
+
+    <div id="gallery-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+      <!-- Dynamic gallery content will appear here -->
+    </div>
+  </section>
+
+  <!-- Files Tab -->
+  <section id="files-tab" class="p-6 hidden">
+    <div class="space-y-6">
+      <div class="bg-white p-4 rounded shadow">
+        <h3 class="font-semibold text-xl">File Title 1</h3>
+        <p class="text-gray-600">Description of file 1 goes here.</p>
+        <a href="files/file1.pdf" download class="mt-2 inline-block bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded shadow">Download File 1</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center p-4 text-sm text-gray-500 mt-10">
+    &copy; 2025 Your Name. All rights reserved.
+  </footer>
+
+  <script>
+    // Call to generate the gallery when the page loads
+    generateGallery();
+  </script>
+</body>
+</html>
