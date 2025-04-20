@@ -51,6 +51,7 @@
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     }
   </style>
+  <!-- GALLERY -->
   <script>
     const galleryImages = [
       {
@@ -85,7 +86,14 @@
         description: 'Good drones obey... Im a good drone... good drones obey... Im a good drone... ',
         nsfw: true
       },
-
+      {
+        src: 'images/NSFW/ratman-chastity.png',
+        title: 'Rem Chastity',
+        artist: 'Ratman',
+        artistLink: 'https://naughtyswirls.carrd.co/',
+        description: 'The first NSFW art I ever commissioned. Also started my love for chastity~',
+        nsfw: true
+      },
     ];
 
     let showNSFW = false;
@@ -145,14 +153,16 @@
   </script>
 </head>
 <body class="bg-[var(--bg-base)] text-[var(--text-base)]">
+  <!-- HEADING -->
   <header class="p-6 text-center bg-[var(--bg-card)] shadow-md">
     <h1 class="text-3xl font-bold mb-2">ThatDimensionalWebsite</h1>
     <div class="flex flex-col items-center space-y-2">
       <img src="images/bethany-hypno.png" alt="Profile Picture" class="w-24 h-24 rounded-full border-4 border-[var(--border-blue)] shadow-md" />
       <p class="text-[var(--text-subtle)] max-w-xl">I'm Rem! I stream on Twitch and make files ^~^</p>
     </div>
+    <!-- SOCIAL MEDIA BUTTONS -->
     <div class="flex flex-wrap justify-center gap-4 mt-6">
-      <a href="https://www.twitch.tv/thatdimensionalfox" target="_blank" class="w-32 h-32 bg-[var(--purple)] text-white rounded-lg flex flex-col items-center justify-center shadow hover:bg-[var(--sky-hover)] transition">
+      <a href="https://www.twitch.tv/thatdimensionalfox" target="_blank" class="w-32 h-32 bg-[var(--purple)] text-white rounded-lg flex flex-col items-center justify-center shadow hover:bg-[var(--purple-hover)] transition">
         <i data-lucide="twitch" class="w-8 h-8 mb-2"></i>
         <span class="text-sm font-semibold">thatdimensionalfox</span>
         <p class="text-xs mt-1 text-center px-1">Twitch</p>
@@ -180,11 +190,13 @@
     </div>
   </header>
 
+  <!-- BUTTONS -->
   <div class="flex justify-center mt-6 gap-4">
     <button id="gallery-btn" onclick="switchTab('gallery')" class="tab-btn px-4 py-2 rounded bg-[var(--tab-bg)] text-[var(--tab-text)]">Gallery</button>
     <button id="files-btn" onclick="switchTab('files')" class="tab-btn px-4 py-2 rounded bg-[var(--tab-bg)] text-[var(--tab-text)]">Files</button>
   </div>
 
+  <!-- NSFW TOGGLE -->
   <section id="gallery-tab" class="p-4 hidden">
     <div class="flex justify-center mb-4">
       <button onclick="toggleNSFW()" class="px-4 py-2 bg-[var(--button)] text-white rounded hover:bg-[var(--button-hover)]">
@@ -194,12 +206,18 @@
     <div id="gallery-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"></div>
   </section>
 
+  <!-- FILES -->
   <section id="files-tab" class="p-6 hidden">
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
       <div class="bg-[var(--bg-card)] p-4 rounded shadow">
         <h3 class="font-semibold text-xl">Good Girl</h3>
         <p class="text-[var(--text-light)]">Your computer is mine... and so is your mind~ [HYPNO]</p>
         <a href="files/Good Girl.zip" download class="mt-2 inline-block bg-[var(--button)] hover:bg-[var(--button-hover)] text-white px-4 py-2 rounded shadow">Download</a>
+      </div>
+      <div class="bg-[var(--bg-card)] p-4 rounded shadow">
+        <h3 class="font-semibold text-xl">Censorslut [CENSORS]</h3>
+        <p class="text-[var(--text-light)]">For those who like censor porn... or who need some convincing~</p>
+        <a href="files/censorslut.exe" download class="mt-2 inline-block bg-[var(--button)] hover:bg-[var(--button-hover)] text-white px-4 py-2 rounded shadow">Download</a>
       </div>
       <div class="bg-[var(--bg-card)] p-4 rounded shadow">
         <h3 class="font-semibold text-xl">File Stealer</h3>
