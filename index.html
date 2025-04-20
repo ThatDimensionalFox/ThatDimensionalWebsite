@@ -9,24 +9,27 @@
   <style>
     :root {
       --bg-base: #444444;
-      --text-base: #111827;
-      --text-subtle: #000000;
+      --text-base: #2d2333;
+      --text-subtle: #1b1b1b;
       --text-muted: #6b7280;
       --text-light: #180044;
       --text-lightest: #9ca3af;
-      --bg-card: #9600ff;
+      --bg-card: #5b009c;
       --shadow: rgba(0, 0, 0, 0.1);
-      --border-blue: #c670ff;
+      --border: #c670ff;
       --blue: #3b82f6;
       --blue-hover: #2563eb;
       --sky: #0ea5e9;
       --sky-hover: #0284c7;
       --purple: #9600ff;
-      --purple-hover: #cb71ff;
+      --purple-hover: #7700cc;
+      --throne: #2513ce;
+      --throne-hover: #180c83;
       --gray-dark: #1f2937;
       --gray-dark-hover: #374151;
       --tab-bg: #d1d5db;
       --tab-text: #1f2937;
+      --files-bg: #ffffff;
       --button: #b330ff;
       --button-hover: #cb71ff;
     }
@@ -58,7 +61,7 @@
         src: 'images/ratman-remref.jpg',
         title: 'Rem Ref Sheet',
         artist: 'Ratman',
-        artistLink: 'https://artistwebsite1.com',
+        artistLink: 'havent gotten link yet',
         description: 'Heres Rem, a multiversal traveller (and my main sona!). Hes a mix of a Fennec Fox, Kangaroo and Silk Moth.',
         nsfw: false
       },
@@ -87,10 +90,26 @@
         nsfw: true
       },
       {
+        src: 'images/lovelock-hypno.jpg',
+        title: 'Rem Hypno',
+        artist: 'Lovelock',
+        artistLink: 'https://lovelockart.carrd.co/',
+        description: 'Am I hypnotising, or getting hypnotised? Ill let you decide~',
+        nsfw: false
+      },
+      {
+        src: 'images/sira-latexhypno.png',
+        title: 'Rem Latex',
+        artist: 'SiraWox',
+        artistLink: 'https://bsky.app/profile/sirawox.bsky.social',
+        description: 'Rem accidentally got turned into latex... but they dont seem too unhappy about it~',
+        nsfw: false
+      },
+      {
         src: 'images/NSFW/ratman-chastity.png',
         title: 'Rem Chastity',
         artist: 'Ratman',
-        artistLink: 'https://naughtyswirls.carrd.co/',
+        artistLink: 'havent gotten link yet',
         description: 'The first NSFW art I ever commissioned. Also started my love for chastity~',
         nsfw: true
       },
@@ -157,7 +176,7 @@
   <header class="p-6 text-center bg-[var(--bg-card)] shadow-md">
     <h1 class="text-3xl font-bold mb-2">ThatDimensionalWebsite</h1>
     <div class="flex flex-col items-center space-y-2">
-      <img src="images/bethany-hypno.png" alt="Profile Picture" class="w-24 h-24 rounded-full border-4 border-[var(--border-blue)] shadow-md" />
+      <img src="images/bethany-hypno.png" alt="Profile Picture" class="w-24 h-24 rounded-full border-4 border-[var(--border)] shadow-md" />
       <p class="text-[var(--text-subtle)] max-w-xl">I'm Rem! I stream on Twitch and make files ^~^</p>
     </div>
     <!-- SOCIAL MEDIA BUTTONS -->
@@ -187,6 +206,11 @@
         <span class="text-sm font-semibold">thatmysteriousfox</span>
         <p class="text-xs mt-1 text-center px-1">NSFW Bluesky</p>
       </a>
+      <a href="https://throne.com/thatmysteriousfox" target="_blank" class="w-32 h-32 bg-[var(--throne)] text-white rounded-lg flex flex-col items-center justify-center shadow hover:bg-[var(--throne-hover)] transition">
+        <i data-lucide="crown" class="w-8 h-8 mb-2"></i>
+        <span class="text-sm font-semibold">thatmysteriousfox</span>
+        <p class="text-xs mt-1 text-center px-1">Throne</p>
+      </a>
     </div>
   </header>
 
@@ -209,19 +233,19 @@
   <!-- FILES -->
   <section id="files-tab" class="p-6 hidden">
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-      <div class="bg-[var(--bg-card)] p-4 rounded shadow">
-        <h3 class="font-semibold text-xl">Good Girl</h3>
-        <p class="text-[var(--text-light)]">Your computer is mine... and so is your mind~ [HYPNO]</p>
+      <div class="bg-[var(--files-bg)] p-4 rounded shadow">
+        <h3 class="font-semibold text-xl">Good Girl [HYPNO]</h3>
+        <p class="text-[var(--text-light)]">Your computer is mine... and so is your mind~</p>
         <a href="files/Good Girl.zip" download class="mt-2 inline-block bg-[var(--button)] hover:bg-[var(--button-hover)] text-white px-4 py-2 rounded shadow">Download</a>
       </div>
-      <div class="bg-[var(--bg-card)] p-4 rounded shadow">
+      <div class="bg-[var(--files-bg)] p-4 rounded shadow">
         <h3 class="font-semibold text-xl">Censorslut [CENSORS]</h3>
         <p class="text-[var(--text-light)]">For those who like censor porn... or who need some convincing~</p>
         <a href="files/censorslut.exe" download class="mt-2 inline-block bg-[var(--button)] hover:bg-[var(--button-hover)] text-white px-4 py-2 rounded shadow">Download</a>
       </div>
-      <div class="bg-[var(--bg-card)] p-4 rounded shadow">
-        <h3 class="font-semibold text-xl">File Stealer</h3>
-        <p class="text-[var(--text-light)]">Encrypts a file of your choice and sends it to me, pay to get it back. [FINDOM]</p>
+      <div class="bg-[var(--files-bg)] p-4 rounded shadow">
+        <h3 class="font-semibold text-xl">File Stealer [FINDOM]</h3>
+        <p class="text-[var(--text-light)]">Encrypts a file of your choice and sends it to me, pay to get it back.</p>
         <a href="files/File Stealer.zip" download class="mt-2 inline-block bg-[var(--button)] hover:bg-[var(--button-hover)] text-white px-4 py-2 rounded shadow">Download</a>
       </div>
     </div>
