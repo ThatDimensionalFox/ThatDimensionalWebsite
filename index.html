@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fox Space</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root {
+      --bg-base: #444444; /* gray-100 */
+      --text-base: #111827; /* gray-900 */
+      --text-subtle: #000000; /* gray-700 */
+      --text-muted: #6b7280; /* gray-600 */
+      --text-light: #180044; /* gray-600 */
+      --text-lightest: #9ca3af; /* gray-500 */
+      --bg-card: #9600ff;
+      --shadow: rgba(0, 0, 0, 0.1);
+      --border-blue: #c670ff;
+      --blue: #3b82f6;
+      --blue-hover: #2563eb;
+      --blue-alt: #60a5fa;
+      --blue-alt-hover: #3b82f6;
+      --sky: #0ea5e9;
+      --sky-hover: #0284c7;
+      --gray-dark: #1f2937;
+      --gray-dark-hover: #374151;
+      --tab-bg: #d1d5db;
+      --tab-text: #1f2937;
+      --button: #b330ff;
+      --button-hover: #cb71ff;
+    }
+  </style>
+  <script>
+    // Gallery images data with relative paths and NSFW flag
+    const galleryImages = [
+      {
+        src: 'images/photo1.jpg',
+        title: 'Artwork Title 1',
+        artist: 'Artist Name 1',
+        artistLink: 'https://artistwebsite1.com',
+        description: 'Description for Artwork 1.',
+        nsfw: false
+      },
+      {
+        src: 'images/photo2.jpg',
+        title: 'Artwork Title 2',
+        artist: 'Artist Name 2',
+        artistLink: 'https://artistwebsite2.com',
+        description: 'Description for Artwork 2.',
+        nsfw: true
+      },
+      {
+        src: 'images/photo3.jpg',
+        title: 'Artwork Title 3',
+        artist: 'Artist Name 3',
+        artistLink: 'https://artistwebsite3.com',
+        description: 'Description for Artwork 3.',
+        nsfw: false
+      },
+    ];
+
+    let showNSFW = false;
+
+    function generateGallery() {
+      const galleryContainer = document.getElementById('gallery-container');
+      galleryContainer.innerHTML = '';
+      const imagesToShow = showNSFW ? galleryImages : galleryImages.filter(image => !image.nsfw);
+      imagesToShow.forEach(image => {
+        const imgDiv = document.createElement('div');
+        imgDiv.className = 'bg-white p-4 rounded shadow hover:scale-105 transition duration-200';
+        imgDiv.innerHTML = `
+          <img src="${image.src}" alt="${image.title}" class="rounded-xl w-full h-48 object-cover mb-4" />
+          <h3 class="font-semibold text-lg">${image.title}</h3>
+          <p class="text-gray-500"><a href="${image.artistLink}" target="_blank" class="text-blue-500 hover:underline">${image.artist}</a></p>
+          <p class="text-gray-600 mt-2">${image.description}</p>
+        `;
+        galleryContainer.appendChild(imgDiv);
+      });
+    }
+
+    function toggleNSFW() {
+      showNSFW = !showNSFW;
+      generateGallery();
+    }
+
+    function switchTab(tabName) {
+      document.getElementById('gallery-tab').classList.add('hidden');
+      document.getElementById('files-tab').classList.add('hidden');
+      document.getElementById(`${tabName}-tab`).classList.remove('hidden');
+
+      const buttons = document.querySelectorAll('.tab-btn');
+      buttons.forEach(btn => btn.classList.remove('bg-blue-500', 'text-white'));
+      document.getElementById(`${tabName}-btn`).classList.add('bg-blue-500', 'text-white');
+    }
+
+    window.onload = function() {
+      generateGallery();
+      switchTab('gallery');
+    };
+  </script>
+</head>
+<body class="bg-[var(--bg-base)] text-[var(--text-base)]">
+  <header class="p-6 text-center bg-[var(--bg-card)] shadow-md">
+    <h1 class="text-3xl font-bold mb-2">Fox Space</h1>
+    <div class="flex flex-col items-center space-y-2">
+      <img src="images/pfp.png" alt="Profile Picture" class="w-24 h-24 rounded-full border-4 border-[var(--border-blue)] shadow-md" />
+      <p class="text-[var(--text-subtle)] max-w-xl">Hi! I'm Rem, I like to steam, make techdom files and I love to cum~ .</p>
+    </div>
+    <div class="flex flex-wrap justify-center gap-4 mt-6">
+      <a href="https://twitter.com/dimensionalfox" target="_blank" class="w-32 h-32 bg-[var(--blue)] text-white rounded-lg flex flex-col items-center justify-center shadow hover:bg-[var(--blue-hover)] transition">
+        <i data-lucide="twitter" class="w-8 h-8 mb-2"></i>
+        <span class="text-sm font-semibold">dimensionalfox</span>
+        <p class="text-xs mt-1 text-center px-1">Main Twitter</p>
+      </a>
+      <a href="https://twitter.com/thathiddenfox" target="_blank" class="w-32 h-32 bg-[var(--blue-alt)] text-white rounded-lg flex flex-col items-center justify-center shadow hover:bg-[var(--blue-alt-hover)] transition">
+        <i data-lucide="twitter" class="w-8 h-8 mb-2"></i>
+        <span class="text-sm font-semibold">thathiddenfox</span>
+        <p class="text-xs mt-1 text-center px-1">Alt Twitter</p>
+      </a>
+      <a href="https://bsky.app/profile/thatdimensionalfox.bsky.social" target="_blank" class="w-32 h-32 bg-[var(--sky)] text-white rounded-lg flex flex-col items-center justify-center shadow hover:bg-[var(--sky-hover)] transition">
+        <i data-lucide="cloud" class="w-8 h-8 mb-2"></i>
+        <span class="text-sm font-semibold">thatdimensionalfox</span>
+        <p class="text-xs mt-1 text-center px-1">Bluesky profile</p>
+      </a>
+      <a href="https://bsky.app/profile/thatmysteriousfox.bsky.social" target="_blank" class="w-32 h-32 bg-[var(--sky)] text-white rounded-lg flex flex-col items-center justify-center shadow hover:bg-[var(--sky-hover)] transition">
+        <i data-lucide="cloud" class="w-8 h-8 mb-2"></i>
+        <span class="text-sm font-semibold">thatmysteriousfox</span>
+        <p class="text-xs mt-1 text-center px-1">Bluesky profile</p>
+      </a>
+      <a href="https://github.com/yourusername" target="_blank" class="w-32 h-32 bg-[var(--gray-dark)] text-white rounded-lg flex flex-col items-center justify-center shadow hover:bg-[var(--gray-dark-hover)] transition">
+        <i data-lucide="github" class="w-8 h-8 mb-2"></i>
+        <span class="text-sm font-semibold">yourusername</span>
+        <p class="text-xs mt-1 text-center px-1">GitHub Projects</p>
+      </a>
+    </div>
+  </header>
+
+  <div class="flex justify-center mt-6 gap-4">
+    <button id="gallery-btn" onclick="switchTab('gallery')" class="tab-btn px-4 py-2 rounded bg-[var(--tab-bg)] text-[var(--tab-text)]">Gallery</button>
+    <button id="files-btn" onclick="switchTab('files')" class="tab-btn px-4 py-2 rounded bg-[var(--tab-bg)] text-[var(--tab-text)]">Files</button>
+  </div>
+
+  <section id="gallery-tab" class="p-4 hidden">
+    <div class="flex justify-center mb-4">
+      <button onclick="toggleNSFW()" class="px-4 py-2 bg-[var(--button)] text-white rounded hover:bg-[var(--button-hover)]">
+        Toggle NSFW
+      </button>
+    </div>
+    <div id="gallery-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"></div>
+  </section>
+
+  <section id="files-tab" class="p-6 hidden">
+    <div class="space-y-6">
+      <div class="bg-[var(--bg-card)] p-4 rounded shadow">
+        <h3 class="font-semibold text-xl">File Stealer</h3>
+        <p class="text-[var(--text-light)]">Encrypts a file of your choice and sends it to me, pay to get it back.</p>
+        <a href="files/File Stealer.zip" download class="mt-2 inline-block bg-[var(--blue)] hover:bg-[var(--blue-hover)] text-white px-4 py-2 rounded shadow">Download</a>
+      </div>
+      <div class="bg-[var(--bg-card)] p-4 rounded shadow">
+        <h3 class="font-semibold text-xl">File 2</h3>
+        <p class="text-[var(--text-light)]">Encrypts a file of your choice and sends it to me, pay to get it back.</p>
+        <a href="files/File Stealer.zip" download class="mt-2 inline-block bg-[var(--blue)] hover:bg-[var(--blue-hover)] text-white px-4 py-2 rounded shadow">Download</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="text-center p-4 text-sm text-[var(--text-lightest)] mt-10">
+    &copy; 2025 Your Name. All rights reserved.
+  </footer>
+
+  <script>
+    generateGallery();
+  </script>
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>
