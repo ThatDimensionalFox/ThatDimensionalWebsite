@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fox Space</title>
+  <title>ThatDimensionalWebsite</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     :root {
-      --bg-base: #444444; /* gray-100 */
-      --text-base: #111827; /* gray-900 */
-      --text-subtle: #000000; /* gray-700 */
-      --text-muted: #6b7280; /* gray-600 */
-      --text-light: #180044; /* gray-600 */
-      --text-lightest: #9ca3af; /* gray-500 */
+      --bg-base: #444444;
+      --text-base: #111827;
+      --text-subtle: #000000;
+      --text-muted: #6b7280;
+      --text-light: #180044;
+      --text-lightest: #9ca3af;
       --bg-card: #9600ff;
       --shadow: rgba(0, 0, 0, 0.1);
       --border-blue: #c670ff;
@@ -30,37 +30,71 @@
       --button: #b330ff;
       --button-hover: #cb71ff;
     }
+
+    .fullscreen-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .fullscreen-image {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 1rem;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    }
   </style>
   <script>
-    // Gallery images data with relative paths and NSFW flag
     const galleryImages = [
       {
-        src: 'images/photo1.jpg',
-        title: 'Artwork Title 1',
-        artist: 'Artist Name 1',
+        src: 'images/ratman-remref.jpg',
+        title: 'Rem Ref Sheet',
+        artist: 'Ratman',
         artistLink: 'https://artistwebsite1.com',
-        description: 'Description for Artwork 1.',
+        description: 'Heres Rem, a multiversal traveller (and my main sona!). Hes a mix of a Fennec Fox, Kangaroo and Silk Moth.',
         nsfw: false
       },
       {
-        src: 'images/photo2.jpg',
-        title: 'Artwork Title 2',
-        artist: 'Artist Name 2',
-        artistLink: 'https://artistwebsite2.com',
-        description: 'Description for Artwork 2.',
-        nsfw: true
+        src: 'images/bethany-arachnaref.png',
+        title: 'Arachna Ref Sheet',
+        artist: 'BethanyGC',
+        artistLink: 'https://bsky.app/profile/bethanisagoose.bsky.social',
+        description: 'Heres Arachna, the multiverses greatest mercenary! Dispite Rem being a pacifist, the two are best of friends and share a cabin out in the multiversal void.',
+        nsfw: false
       },
       {
-        src: 'images/photo3.jpg',
-        title: 'Artwork Title 3',
-        artist: 'Artist Name 3',
-        artistLink: 'https://artistwebsite3.com',
-        description: 'Description for Artwork 3.',
+        src: 'images/duderedblue-kitsune.png',
+        title: 'Rem Kitsune',
+        artist: 'DudeRedBlue',
+        artistLink: 'https://www.furaffinity.net/user/redbluedude/',
+        description: 'Kitsunes are a personal favorite, what can I say?',
         nsfw: false
       },
     ];
 
     let showNSFW = false;
+
+    function openFullscreen(src) {
+      const overlay = document.createElement('div');
+      overlay.className = 'fullscreen-overlay';
+      overlay.onclick = function (e) {
+        if (e.target === overlay) {
+          overlay.remove();
+        }
+      };
+      const img = document.createElement('img');
+      img.src = src;
+      img.className = 'fullscreen-image';
+      overlay.appendChild(img);
+      document.body.appendChild(overlay);
+    }
 
     function generateGallery() {
       const galleryContainer = document.getElementById('gallery-container');
@@ -68,7 +102,8 @@
       const imagesToShow = showNSFW ? galleryImages : galleryImages.filter(image => !image.nsfw);
       imagesToShow.forEach(image => {
         const imgDiv = document.createElement('div');
-        imgDiv.className = 'bg-white p-4 rounded shadow hover:scale-105 transition duration-200';
+        imgDiv.className = 'bg-white p-4 rounded shadow hover:scale-105 transition duration-200 cursor-pointer';
+        imgDiv.onclick = () => openFullscreen(image.src);
         imgDiv.innerHTML = `
           <img src="${image.src}" alt="${image.title}" class="rounded-xl w-full h-48 object-cover mb-4" />
           <h3 class="font-semibold text-lg">${image.title}</h3>
@@ -90,11 +125,11 @@
       document.getElementById(`${tabName}-tab`).classList.remove('hidden');
 
       const buttons = document.querySelectorAll('.tab-btn');
-      buttons.forEach(btn => btn.classList.remove('bg-blue-500', 'text-white'));
-      document.getElementById(`${tabName}-btn`).classList.add('bg-blue-500', 'text-white');
+      buttons.forEach(btn => btn.classList.remove('bg-button-500', 'text-white'));
+      document.getElementById(`${tabName}-btn`).classList.add('bg-button-500', 'text-white');
     }
 
-    window.onload = function() {
+    window.onload = function () {
       generateGallery();
       switchTab('gallery');
     };
@@ -102,9 +137,9 @@
 </head>
 <body class="bg-[var(--bg-base)] text-[var(--text-base)]">
   <header class="p-6 text-center bg-[var(--bg-card)] shadow-md">
-    <h1 class="text-3xl font-bold mb-2">Fox Space</h1>
+    <h1 class="text-3xl font-bold mb-2">ThatDimensionalWebsite</h1>
     <div class="flex flex-col items-center space-y-2">
-      <img src="images/pfp.png" alt="Profile Picture" class="w-24 h-24 rounded-full border-4 border-[var(--border-blue)] shadow-md" />
+      <img src="images/bethany-hypno.png" alt="Profile Picture" class="w-24 h-24 rounded-full border-4 border-[var(--border-blue)] shadow-md" />
       <p class="text-[var(--text-subtle)] max-w-xl">Hi! I'm Rem, I like to steam, make techdom files and I love to cum~ .</p>
     </div>
     <div class="flex flex-wrap justify-center gap-4 mt-6">
@@ -151,7 +186,7 @@
   </section>
 
   <section id="files-tab" class="p-6 hidden">
-    <div class="space-y-6">
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
       <div class="bg-[var(--bg-card)] p-4 rounded shadow">
         <h3 class="font-semibold text-xl">File Stealer</h3>
         <p class="text-[var(--text-light)]">Encrypts a file of your choice and sends it to me, pay to get it back.</p>
@@ -166,7 +201,7 @@
   </section>
 
   <footer class="text-center p-4 text-sm text-[var(--text-lightest)] mt-10">
-    &copy; 2025 Your Name. All rights reserved.
+    &copy; 2025 ThatDimensionalFox. All rights reserved.
   </footer>
 
   <script>
