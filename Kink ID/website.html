@@ -349,15 +349,20 @@
       drawImageFromInput("bgInput", bg => {
         if (bg) {
           const opacity = parseFloat(document.getElementById("bgOpacity").value || "1");
+
+          // Step 1: Always fill solid white base first
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+          // Step 2: Draw background image with specified opacity
           ctx.save();
           ctx.globalAlpha = opacity;
-          ctx.fillStyle = "#ffffff"; // or your preferred solid background color
-          ctx.fillRect(0, 0, canvas.width, canvas.height);          
           ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
           ctx.restore();
+
+          // Step 3: Reset alpha (just in case)
           ctx.globalAlpha = 1;
         }
-
         const x = canvas.width / 2;
         const y = 125;
         ctx.font = "bold 96px Acme";
