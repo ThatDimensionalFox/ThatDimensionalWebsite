@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kink ID Generator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --button-color: #ff69b4;
+      --button-hover-color: #ff4fa6;
+    }
+
+    body {
+      font-family: 'Acme', sans-serif;
+      background: #f2f2f2;
+      padding: 40px;
+      font-size: 18px;
+      transform: scale(1.25);
+      transform-origin: top left;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: 1400px;
+      margin-bottom: 30px;
+    }
+
+    .control-group {
+      background: #ffffff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .control-group label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    input[type="file"],
+    input[type="color"],
+    input[type="text"],
+    input[type="range"] {
+      margin-left: 10px;
+      font-size: 16px;
+      margin-top: 5px;
+    }
+
+    .badge-preview-container {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .badge-thumb {
+      width: 100px;
+      height: 100px;
+      position: relative;
+      border: 2px solid transparent;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .badge-thumb.selected {
+      border-color: #000000;
+      box-shadow: 0 0 10px #000000;
+    }
+
+    .badge-thumb.inactive {
+      opacity: 0.3;
+      filter: grayscale(100%);
+    }
+
+    .badge-thumb.dragging {
+      opacity: 0.6;
+      transform: scale(1.05);
+      z-index: 999;
+    }
+
+    .badge-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .remove-badge {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 18px;
+      text-align: center;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    #idCanvas {
+      border: 2px solid #999;
+      display: block;
+      margin: 30px 0;
+      width: 100%;
+      height: auto;
+      max-width: 1280px;
+    }
+
+    button {
+      font-size: 18px;
+      padding: 10px 20px;
+      background-color: var(--button-color);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: var(--button-hover-color);
+    }
+
+    .center {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <!-- Controls Section -->
+  <div class="controls">
+    <div class="control-group">
+      <label>Background Image: <input type="file" id="bgInput" accept="image/*">
+        <button class="remove-btn" onclick="removeImage('bgInput')">Remove</button>
+      </label>
+    </div>
+
+    <div class="control-group">
+      <label>Background Opacity:
+        <input type="range" id="bgOpacity" min="0" max="1" step="0.01" value="0.25">
+      </label>
+    </div>
+
+    <div class="control-group">
+      <label>Profile Picture: <input type="file" id="pfpInput" accept="image/*">
+        <button class="remove-btn" onclick="removeImage('pfpInput')">Remove</button>
+      </label>
+    </div>
+
+    <div class="control-group">
+      <label>Border Image: <input type="file" id="borderInput" accept="image/*">
+        <button class="remove-btn" onclick="removeImage('borderInput')">Remove</button>
+      </label>
+    </div>
+
+    <div class="control-group">
+      <label>Stamp Image: <input type="file" id="stampInput" accept="image/*">
+        <button class="remove-btn" onclick="removeImage('stampInput')">Remove</button>
+      </label>
+    </div>
+
+    <div class="control-group">
+      <label>Border Color: <input type="color" id="solidBorderColor" value="#ff69b4"></label>
+    </div>
+
+    <div class="control-group">
+      <label>Display Name: <input type="text" id="displayName"></label>
+    </div>
+
+    <div class="control-group">
+      <label>Sexuality: <input type="text" id="sexuality" style="font-size: 14px;"></label>
+    </div>
+
+    <div class="control-group">
+      <label>Position: <input type="text" id="position" style="font-size: 14px;"></label>
+    </div>
+
+    <div class="control-group">
+      <label>Username (@): <input type="text" id="username"></label>
+    </div>
+
+    <div class="control-group">
+      <label>Badge Selection:<br>
+        <input type="file" id="badgeInput" accept="image/*" multiple>
+      </label>
+      <div class="badge-preview-container" id="badgePreview"></div>
+    </div>
+  </div>
+
+  <!-- Canvas Section -->
+  <div id="canvasSection">
+    <canvas id="idCanvas" width="2560" height="1440"></canvas>
+    <div class="center">
+      <button onclick="downloadID()">Download ID</button>
+    </div>
+  </div>
+
+  <!-- Script Section -->
+  <footer class="text-center p-4 text-sm text-[var(--text-lightest)] mt-10">
+    &copy; Website made by @ThatDimensionalFox. Badge artwork made by @1mpossiblenight on Discord
+  </footer>
+
+  <script>
+    const badgePreview = document.getElementById("badgePreview");
+    let selectedBadges = [];
+
+    const defaultBadgeNames = [
+      "Account_Play.png", "BDSM.png", "BLACKED.png", "Blackmail.png", "Censored.png", 
+      "Chastity.png", "Cucking.png", "Diaper_Play.png", "Feet.png", "Feminization.png", 
+      "Findom.png", "Humiliation.png", "Hypnosis.png", "IRL_Photos.png", "Petplay.png", 
+      "Piss_Play.png", "SadoMaso.png", "Scent_Play.png", "Techdom.png", "TPE.png"
+    ];
+
+    window.onload = function () {
+      const defaultBg = new Image();
+      defaultBg.src = "images/background.png";
+      defaultBg.onload = () => {
+        document.getElementById("bgInput").dataset.default = defaultBg.src;
+        renderID();
+      };
+
+      const defaultStamp = new Image();
+      defaultStamp.src = "images/verifiedcutie.png";
+      defaultStamp.onload = () => {
+        document.getElementById("stampInput").dataset.default = defaultStamp.src;
+        renderID();
+      };
+
+      defaultBadgeNames.forEach(name => {
+        const img = new Image();
+        img.onload = () => {
+          selectedBadges.push({ src: img.src, visible: true });
+          renderBadgeThumbnails();
+          renderID();
+        };
+        img.src = `images/${name}`;
+      });
+    };
+
+    document.getElementById("badgeInput").addEventListener("change", function(e) {
+      [...e.target.files].forEach((file) => {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          selectedBadges.push({ src: evt.target.result, visible: true });
+          renderBadgeThumbnails();
+          renderID();
+        }
+        reader.readAsDataURL(file);
+      });
+    });
+
+    function renderBadgeThumbnails() {
+      badgePreview.innerHTML = "";
+      selectedBadges.forEach((badge, index) => {
+        const div = document.createElement("div");
+        div.className = `badge-thumb ${badge.visible ? "selected" : "inactive"}`;
+        div.setAttribute("draggable", true);
+
+        const img = document.createElement("img");
+        img.src = badge.src;
+
+        div.onclick = () => {
+          badge.visible = !badge.visible;
+          renderBadgeThumbnails();
+          renderID();
+        };
+
+        const removeBtn = document.createElement("button");
+        removeBtn.className = "remove-badge";
+        removeBtn.textContent = "×";
+        removeBtn.onclick = (e) => {
+          e.stopPropagation();
+          selectedBadges.splice(index, 1);
+          renderBadgeThumbnails();
+          renderID();
+        };
+
+        div.addEventListener("dragstart", e => {
+          e.dataTransfer.setData("badgeIndex", index);
+          div.classList.add("dragging");
+        });
+
+        div.addEventListener("dragend", () => {
+          div.classList.remove("dragging");
+        });
+
+        div.addEventListener("dragover", e => e.preventDefault());
+
+        div.addEventListener("drop", e => {
+          e.preventDefault();
+          const fromIndex = parseInt(e.dataTransfer.getData("badgeIndex"));
+          const toIndex = index;
+          const dragged = selectedBadges.splice(fromIndex, 1)[0];
+          selectedBadges.splice(toIndex, 0, dragged);
+          renderBadgeThumbnails();
+          renderID();
+        });
+
+        div.appendChild(removeBtn);
+        div.appendChild(img);
+        badgePreview.appendChild(div);
+      });
+    }
+
+    function removeImage(inputId) {
+      const input = document.getElementById(inputId);
+      input.value = '';
+      renderID();
+    }
+
+    ["bgInput", "pfpInput", "borderInput", "stampInput", "displayName", "username", "solidBorderColor", "bgOpacity", "sexuality", "position"].forEach(id => {
+      document.getElementById(id).addEventListener("input", renderID);
+      document.getElementById(id).addEventListener("change", renderID);
+    });
+
+    const canvas = document.getElementById("idCanvas");
+    const ctx = canvas.getContext("2d");
+
+    function renderID() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const drawImageFromInput = (inputId, callback) => {
+        const fileInput = document.getElementById(inputId);
+        if (fileInput.files[0]) {
+          const img = new Image();
+          img.onload = () => callback(img);
+          img.src = URL.createObjectURL(fileInput.files[0]);
+        } else if (fileInput.dataset.default) {
+          const img = new Image();
+          img.onload = () => callback(img);
+          img.src = fileInput.dataset.default;
+        } else {
+          callback(null);
+        }
+      };
+
+      drawImageFromInput("bgInput", bg => {
+        if (bg) {
+          const opacity = parseFloat(document.getElementById("bgOpacity").value || "1");
+          ctx.save();
+          ctx.globalAlpha = opacity;
+          ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
+          ctx.restore();
+          ctx.globalAlpha = 1;
+        }
+
+        const x = canvas.width / 2;
+        const y = 125;
+        ctx.font = "bold 96px Acme";
+        ctx.textAlign = "center";
+        ctx.shadowColor = "#000";
+        ctx.shadowBlur = 6;
+
+        const fullText = "OFFICIAL KINK LICENSE";
+        const kinkStart = fullText.indexOf("KINK");
+        const before = fullText.substring(0, kinkStart);
+        const kink = "KINK";
+        const after = fullText.substring(kinkStart + 5);
+
+        const beforeWidth = ctx.measureText(before).width;
+        const kinkWidth = ctx.measureText(kink).width;
+        const afterWidth = ctx.measureText(after).width;
+        const startX = x - (beforeWidth + kinkWidth + afterWidth) / 2;
+
+        ctx.fillStyle = "black";
+        ctx.fillText(before, startX + beforeWidth / 2, y);
+        ctx.fillStyle = "#ff69b4";
+        ctx.fillText(kink, startX + beforeWidth + kinkWidth / 2, y);
+        ctx.fillStyle = "black";
+        ctx.fillText(after, startX + beforeWidth + kinkWidth + afterWidth / 2, y);
+
+        drawImageFromInput("pfpInput", pfp => {
+          if (pfp) {
+            const profilePicX = 160;
+            const profilePicY = 300;
+            const profilePicSize = 500;
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(profilePicX + profilePicSize / 2, profilePicY + profilePicSize / 2, profilePicSize / 2, 0, Math.PI * 2);
+            ctx.closePath();
+            ctx.clip();
+            ctx.drawImage(pfp, profilePicX, profilePicY, profilePicSize, profilePicSize);
+            ctx.restore();
+
+            ctx.beginPath();
+            ctx.arc(profilePicX + profilePicSize / 2, profilePicY + profilePicSize / 2, profilePicSize / 2, 0, Math.PI * 2);
+            ctx.strokeStyle = document.getElementById("solidBorderColor").value;
+            ctx.lineWidth = 10;
+            ctx.stroke();
+
+            ctx.font = "bold 121.79px Acme";
+            ctx.fillStyle = "black";
+            ctx.textAlign = "center";
+            ctx.shadowBlur = 0;
+
+            const displayNameX = profilePicX + profilePicSize / 2;
+            const displayNameY = profilePicY + profilePicSize + 125;
+            const sexualityY = displayNameY + 80;
+            const positionY = sexualityY + 80;
+
+            ctx.fillText(document.getElementById("displayName").value, displayNameX, displayNameY);
+            ctx.font = "bold 80px Acme";
+            ctx.fillText(document.getElementById("sexuality").value, displayNameX, sexualityY);
+            ctx.fillText(document.getElementById("position").value, displayNameX, positionY);
+          }
+
+          drawImageFromInput("stampInput", stamp => {
+            if (stamp) {
+              const size = 450;
+              const x = canvas.width - size;
+              const y = canvas.height - size;
+              ctx.drawImage(stamp, x, y, size, size);
+            }
+
+            drawImageFromInput("borderInput", border => {
+              if (border) {
+                ctx.drawImage(border, 0, 0, canvas.width, canvas.height);
+              } else {
+                ctx.strokeStyle = document.getElementById("solidBorderColor").value;
+                ctx.lineWidth = 100;
+                ctx.strokeRect(0, 0, canvas.width, canvas.height);
+              }
+
+              ctx.font = "italic 121.79px Acme";
+              ctx.fillStyle = "rgba(150,150,150,1)";
+              ctx.textAlign = "left";
+              ctx.shadowBlur = 0;
+              ctx.fillText("@" + document.getElementById("username").value, 50, canvas.height - 80);
+
+              const badgeSize = 250;
+              selectedBadges.filter(b => b.visible).slice(0, 20).forEach((badge, i) => {
+                const img = new Image();
+                img.onload = () => {
+                  const row = Math.floor(i / 6);
+                  const col = i % 6;
+                  const x = 800 + col * (badgeSize + 20);
+                  const y = 200 + row * (badgeSize + 20);
+                  ctx.drawImage(img, x, y, badgeSize, badgeSize);
+                };
+                img.src = badge.src;
+              });
+            });
+          });
+        });
+      });
+    }
+
+    function downloadID() {
+      const link = document.createElement("a");
+      link.download = "kink-id.png";
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+    }
+  </script>
+</body>
+</html>
