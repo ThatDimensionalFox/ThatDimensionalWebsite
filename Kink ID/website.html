@@ -351,6 +351,8 @@
           const opacity = parseFloat(document.getElementById("bgOpacity").value || "1");
           ctx.save();
           ctx.globalAlpha = opacity;
+          ctx.fillStyle = "#ffffff"; // or your preferred solid background color
+          ctx.fillRect(0, 0, canvas.width, canvas.height);          
           ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
           ctx.restore();
           ctx.globalAlpha = 1;
