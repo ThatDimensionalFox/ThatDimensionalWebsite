@@ -1,0 +1,1 @@
+By running this file and choosing a folder, you are agreeing that the data is going to be encrypted and sent to me. Do not do this unless you're prepared to lose the files or prepared to pay for them~
