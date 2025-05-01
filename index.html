@@ -251,6 +251,68 @@
       generateGallery();
       switchTab('gallery');
     };
+</script>
+<!--WRITING-->
+<script>
+    const writings = [
+  { title: "Rem's Journal 1", file: "writings/story1.txt" },
+  { title: "Void Travel Log", file: "writings/travel_log.txt" },
+  { title: "Hypnosis Script", file: "writings/hypno_script.txt" }
+];
+
+function generateWritingList() {
+  const listContainer = document.getElementById('writing-list');
+  listContainer.innerHTML = '';
+  writings.forEach(writing => {
+    const card = document.createElement('div');
+    card.className = 'bg-[var(--files-bg)] p-4 rounded shadow cursor-pointer hover:scale-105 transition';
+    card.innerHTML = `
+      <h3 class="font-semibold text-xl mb-2">${writing.title}</h3>
+      <button onclick="openWriting('${writing.file}')" class="mt-2 inline-block bg-[var(--button)] hover:bg-[var(--button-hover)] text-white px-4 py-2 rounded shadow">Read</button>
+    `;
+    listContainer.appendChild(card);
+  });
+}
+
+function openWriting(filePath) {
+  fetch(filePath)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('File not found or failed to load');
+      }
+      return response.text();
+    })
+    .then(data => {
+      document.getElementById('writing-list').classList.add('hidden');
+      document.getElementById('writing-content').classList.remove('hidden');
+      document.getElementById('writing-text').textContent = data;
+    })
+    .catch(error => {
+      alert('Error loading file: ' + error.message);
+    });
+}
+
+function closeWriting() {
+  document.getElementById('writing-list').classList.remove('hidden');
+  document.getElementById('writing-content').classList.add('hidden');
+}
+
+function switchTab(tabName) {
+  document.getElementById('gallery-tab').classList.add('hidden');
+  document.getElementById('files-tab').classList.add('hidden');
+  document.getElementById('writing-tab').classList.add('hidden');
+
+  const buttons = document.querySelectorAll('.tab-btn');
+  buttons.forEach(btn => btn.classList.remove('bg-button-500', 'text-white'));
+  document.getElementById(`${tabName}-btn`).classList.add('bg-button-500', 'text-white');
+
+  document.getElementById(`${tabName}-tab`).classList.remove('hidden');
+
+  if (tabName === 'writing') {
+    generateWritingList();
+  }
+}
+
   </script>
 </head>
 <body class="bg-[var(--bg-base)] text-[var(--text-base)]">
@@ -305,8 +367,9 @@
   <div class="flex justify-center mt-6 gap-4">
     <button id="gallery-btn" onclick="switchTab('gallery')" class="tab-btn px-4 py-2 rounded bg-[var(--tab-bg)] text-[var(--tab-text)]">Gallery</button>
     <button id="files-btn" onclick="switchTab('files')" class="tab-btn px-4 py-2 rounded bg-[var(--tab-bg)] text-[var(--tab-text)]">Files</button>
+    <button id="writing-btn" onclick="switchTab('writing')" class="tab-btn px-4 py-2 rounded bg-[var(--tab-bg)] text-[var(--tab-text)]">Writing</button>
   </div>
-
+  
   <!-- NSFW TOGGLE -->
   <section id="gallery-tab" class="p-4 hidden">
     <div class="flex justify-center mb-4">
@@ -337,6 +400,18 @@
       </div>
     </div>
   </section>
+
+  <!-- WRITING -->
+<section id="writing-tab" class="p-6 hidden">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id="writing-list">
+    <!-- Writing entries will be loaded here -->
+  </div>
+  <div id="writing-content" class="mt-8 bg-white p-6 rounded shadow text-black hidden">
+    <button onclick="closeWriting()" class="mb-4 px-4 py-2 bg-[var(--button)] hover:bg-[var(--button-hover)] text-white rounded shadow">Back to List</button>
+    <pre id="writing-text" class="whitespace-pre-wrap text-sm"></pre>
+  </div>
+</section>
+
 
   <footer class="text-center p-4 text-sm text-[var(--text-lightest)] mt-10">
     &copy; 2025 ThatDimensionalFox. All rights reserved.
