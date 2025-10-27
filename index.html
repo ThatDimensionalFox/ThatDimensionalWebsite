@@ -1,443 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ThatDimensionalWebsite</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <style>
-    :root {
-      --bg-base: #444444;
-      --text-base: #2d2333;
-      --text-subtle: #1b1b1b;
-      --text-muted: #6b7280;
-      --text-light: #180044;
-      --text-lightest: #9ca3af;
-      --bg-card: #5b009c;
-      --shadow: rgba(0, 0, 0, 0.1);
-      --border: #c670ff;
-      --blue: #3b82f6;
-      --blue-hover: #2563eb;
-      --sky: #0ea5e9;
-      --sky-hover: #0284c7;
-      --purple: #9600ff;
-      --purple-hover: #7700cc;
-      --throne: #df26df;
-      --throne-hover: #a31ba3;
-      --kofi: #df265d;
-      --kofi-hover: #b81f4d;
-      --gray-dark: #1f2937;
-      --gray-dark-hover: #374151;
-      --tab-bg: #d1d5db;
-      --tab-text: #1f2937;
-      --files-bg: #ffffff;
-      --button: #b330ff;
-      --button-hover: #cb71ff;
-    }
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ThatDimensionalWebsite</title>
+            <script src="https://cdn.tailwindcss.com"></script>
+            <script src="https://unpkg.com/lucide@latest"></script>
 
-    .fullscreen-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgba(0, 0, 0, 0.8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-    }
+            <style>
+                h2{
+                    text-align: center;
+                }
+            </style>
+    </head>
 
-    .fullscreen-image {
-      max-width: 90%;
-      max-height: 90%;
-      border-radius: 1rem;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    }
-  </style>
-  <!-- GALLERY -->
-  <script>
-    const galleryImages = [
-      {
-        src: 'images/ratman-remref.jpg',
-        title: 'Rem Ref Sheet',
-        artist: 'Ratman',
-        artistLink: 'havent gotten link yet',
-        description: 'Heres Rem, a multiversal traveller (and my main sona!). Hes a mix of a Fennec Fox, Kangaroo and Silk Moth.',
-        nsfw: false
-      },
-      {
-        src: 'images/bethany-arachnaref.png',
-        title: 'Arachna Ref Sheet',
-        artist: 'BethanyGC',
-        artistLink: 'https://bsky.app/profile/bethanisagoose.bsky.social',
-        description: 'Heres Arachna, the multiverses greatest mercenary! Dispite Rem being a pacifist, the two are best of friends and share a cabin out in the multiversal void.',
-        nsfw: false
-      },
-      {
-        src: 'images/bethany-zoroark.png',
-        title: 'Selene the Zoroark',
-        artist: 'BethanyGC',
-        artistLink: 'https://bsky.app/profile/bethanisagoose.bsky.social',
-        description: 'My pokesona! They use their illusions to hypnotise people (though they are extra susceptible themselves)',
-        nsfw: false
-      },
-      {
-        src: 'images/NSFW/kippz-zoroark.png',
-        title: 'Selene Nulge',
-        artist: 'Kippz',
-        artistLink: 'https://bsky.app/profile/kippz.bsky.social',
-        description: 'Seems that those spirals were too enticing for Selene. Hypnotised herself while stuck as a latex zoroark~',
-        nsfw: true
-      },
-      {
-        src: 'images/duderedblue-kitsune.png',
-        title: 'Rem Kitsune',
-        artist: 'DudeRedBlue',
-        artistLink: 'https://www.furaffinity.net/user/redbluedude/',
-        description: 'Kitsunes are a personal favorite, what can I say?',
-        nsfw: false
-      },
-      {
-        src: 'images/NSFW/nasty-hypno.png',
-        title: 'Rem Hypno Visor',
-        artist: 'NaughtySwirls',
-        artistLink: 'https://naughtyswirls.carrd.co/',
-        description: 'Good drones obey... Im a good drone... good drones obey... Im a good drone... ',
-        nsfw: true
-      },
-      {
-        src: 'images/bethany-hypno.png',
-        title: 'Rem Pocketwatch',
-        artist: 'BethanyGC',
-        artistLink: 'https://bsky.app/profile/bethanisagoose.bsky.social',
-        description: 'My favorate hypnosis art I have ever gotten! Wish someone would do that to me- I mean what?',
-        nsfw: false
-      },
-      {
-        src: 'images/lovelock-small.png',
-        title: 'Rem Small',
-        artist: 'Lovelock',
-        artistLink: 'https://lovelockart.carrd.co/',
-        description: 'Hey, Im down here! Hey!',
-        nsfw: false
-      },
-      {
-        src: 'images/lovelock-paws.png',
-        title: 'Rem Paws',
-        artist: 'Lovelock',
-        artistLink: 'https://lovelockart.carrd.co/',
-        description: 'Dont my paws look tasty~?',
-        nsfw: false
-      },
-      {
-        src: 'images/lovelock-hypno.jpg',
-        title: 'Rem Hypno',
-        artist: 'Lovelock',
-        artistLink: 'https://lovelockart.carrd.co/',
-        description: 'Am I hypnotising, or getting hypnotised? Ill let you decide~',
-        nsfw: false
-      },
-      {
-        src: 'images/lovelock-muzzle.jpg',
-        title: 'Rem Muzzle',
-        artist: 'Lovelock',
-        artistLink: 'https://lovelockart.carrd.co/',
-        description: 'Hey, dont muzzle me! I promise I wont talk back ag- mmmmhhhffff!',
-        nsfw: false
-      },
-      {
-        src: 'images/sira-latexhypno.png',
-        title: 'Rem Latex',
-        artist: 'SiraWox',
-        artistLink: 'https://bsky.app/profile/sirawox.bsky.social',
-        description: 'Rem accidentally got turned into latex... but they dont seem too unhappy about it~',
-        nsfw: false
-      },
-      {
-        src: 'images/sleeplesskiwi-headshot.png',
-        title: 'Rem (Cool)',
-        artist: 'Sleepless Kiwi',
-        artistLink: 'https://sleeplesskiwi.carrd.co/',
-        description: 'Got this as a bonus for donating for someones car repairs. Thanks Kiwi!',
-        nsfw: false
-      },
-      {
-        src: 'images/ratman-hottub.png',
-        title: 'Rem Hottub',
-        artist: 'Ratman',
-        artistLink: '',
-        description: 'Relaxing with Serahbellite and Alexis Rose!',
-        nsfw: false
-      },
-      {
-        src: 'images/ratman-metal.png',
-        title: 'Rem & Wolfstorm',
-        artist: 'Ratman',
-        artistLink: '',
-        description: 'Liquid metal sonas sure are fun when they coat you~',
-        nsfw: false
-      },
-      {
-        src: 'images/NSFW/ratman-chastity.png',
-        title: 'Rem Chastity',
-        artist: 'Ratman',
-        artistLink: '',
-        description: 'The first NSFW art I ever commissioned. Also started my love for chastity~',
-        nsfw: true
-      },
-      // {
-      //   src: 'images/',
-      //   title: '',
-      //   artist: '',
-      //   artistLink: '',
-      //   description: '',
-      //   nsfw: false
-      // },
-    ];
+    <body>  
+        <!-- Toggle button: top-right -->
+<button id="sidenavToggle"
+        class="sidenav-toggle"
+        aria-controls="Primary"
+        aria-expanded="true"
+        title="Toggle sidebar">
+  <i data-lucide="menu"></i>
+  <span class="sr-only">Toggle sidebar</span>
+</button>          
+    <div class="grid-container">
+        <!-- Side navigation -->
+    <!-- Replace existing .sidenav links with these -->
+    <nav class="sidenav" aria-label="Primary">
+    <a href="#/home" class="nav-link" role="button" tabindex="0">Home</a>
+    <a href="#/gallery" class="nav-link" role="button" tabindex="0">Gallery</a>
+    <a href="#/files" class="nav-link" role="button" tabindex="0">Files</a>
+    <a href="#/writing" class="nav-link" role="button" tabindex="0">Writing</a>
+    </nav>
 
-    let showNSFW = false;
+        <!-- Page content -->
+<!-- Page content (REPLACE your existing .main block with this) -->
+<div class="main">
+  <!-- <header>
+    <h2 id="page-title">Welcome</h2>
+  </header> -->
 
-    function openFullscreen(src) {
-      const overlay = document.createElement('div');
-      overlay.className = 'fullscreen-overlay';
-      overlay.onclick = function (e) {
-        if (e.target === overlay) {
-          overlay.remove();
-        }
-      };
-      const img = document.createElement('img');
-      img.src = src;
-      img.className = 'fullscreen-image';
-      overlay.appendChild(img);
-      document.body.appendChild(overlay);
-    }
-
-    function generateGallery() {
-      const galleryContainer = document.getElementById('gallery-container');
-      galleryContainer.innerHTML = '';
-      const imagesToShow = showNSFW ? galleryImages : galleryImages.filter(image => !image.nsfw);
-      imagesToShow.forEach(image => {
-        const imgDiv = document.createElement('div');
-        imgDiv.className = 'bg-white p-4 rounded shadow hover:scale-105 transition duration-200 cursor-pointer';
-        imgDiv.onclick = () => openFullscreen(image.src);
-        imgDiv.innerHTML = `
-          <img src="${image.src}" alt="${image.title}" class="rounded-xl w-full h-48 object-cover mb-4" />
-          <h3 class="font-semibold text-lg">${image.title}</h3>
-          <p class="text-gray-500"><a href="${image.artistLink}" target="_blank" class="text-blue-500 hover:underline">${image.artist}</a></p>
-          <p class="text-gray-600 mt-2">${image.description}</p>
-        `;
-        galleryContainer.appendChild(imgDiv);
-      });
-    }
-
-    function toggleNSFW() {
-      showNSFW = !showNSFW;
-      generateGallery();
-    }
-
-    function switchTab(tabName) {
-      document.getElementById('gallery-tab').classList.add('hidden');
-      document.getElementById('files-tab').classList.add('hidden');
-      document.getElementById(`${tabName}-tab`).classList.remove('hidden');
-
-      const buttons = document.querySelectorAll('.tab-btn');
-      buttons.forEach(btn => btn.classList.remove('bg-button-500', 'text-white'));
-      document.getElementById(`${tabName}-btn`).classList.add('bg-button-500', 'text-white');
-    }
-
-    window.onload = function () {
-      generateGallery();
-      switchTab('gallery');
-    };
-</script>
-<!--WRITING-->
-<script>
-    const writings = [
-  { title: "Test 1", file: "writings/story1.txt" },
-];
-
-function generateWritingList() {
-  const listContainer = document.getElementById('writing-list');
-  listContainer.innerHTML = '';
-  writings.forEach(writing => {
-    const card = document.createElement('div');
-    card.className = 'bg-[var(--files-bg)] p-4 rounded shadow cursor-pointer hover:scale-105 transition';
-    card.innerHTML = `
-      <h3 class="font-semibold text-xl mb-2">${writing.title}</h3>
-      <button onclick="openWriting('${writing.file}')" class="mt-2 inline-block bg-[var(--button)] hover:bg-[var(--button-hover)] text-white px-4 py-2 rounded shadow">Read</button>
-    `;
-    listContainer.appendChild(card);
-  });
-}
-
-function openWriting(filePath) {
-  fetch(filePath)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('File not found or failed to load');
-      }
-      return response.text();
-    })
-    .then(data => {
-      document.getElementById('writing-list').classList.add('hidden');
-      document.getElementById('writing-content').classList.remove('hidden');
-      document.getElementById('writing-text').textContent = data;
-    })
-    .catch(error => {
-      alert('Error loading file: ' + error.message);
-    });
-}
-
-function closeWriting() {
-  document.getElementById('writing-list').classList.remove('hidden');
-  document.getElementById('writing-content').classList.add('hidden');
-}
-
-function switchTab(tabName) {
-  document.getElementById('gallery-tab').classList.add('hidden');
-  document.getElementById('files-tab').classList.add('hidden');
-  document.getElementById('writing-tab').classList.add('hidden');
-
-  const buttons = document.querySelectorAll('.tab-btn');
-  buttons.forEach(btn => btn.classList.remove('bg-button-500', 'text-white'));
-  document.getElementById(`${tabName}-btn`).classList.add('bg-button-500', 'text-white');
-
-  document.getElementById(`${tabName}-tab`).classList.remove('hidden');
-
-  if (tabName === 'writing') {
-    generateWritingList();
+  <!-- This is the ONLY area that will be replaced on route changes -->
+  <main id="page-content" tabindex="-1" class="mt-4">
+    <!-- initial fallback content will be replaced by pages/home.html -->
+    <p>Loading...</p>
+  </main>
+</div>
+    </div>
+    <script src="content-loader.js" defer></script>
+    <script>
+  // init lucide icons (if using lucide)
+  if (window.lucide) {
+    try { lucide.replace(); } catch (e) { /* ignore */ }
   }
-}
 
-  </script>
-</head>
-<body class="bg-[var(--bg-base)] text-[var(--text-base)]">
-  <!-- HEADING -->
-  <header class="p-6 text-center bg-[var(--bg-card)] shadow-md">
-    <h1 class="text-3xl font-bold mb-2">ThatDimensionalWebsite</h1>
-    <div class="flex flex-col items-center space-y-2">
-      <img src="images/bethany-hypno.png" alt="Profile Picture" class="w-24 h-24 rounded-full border-4 border-[var(--border)] shadow-md" />
-      <p class="text-[var(--text-subtle)] max-w-xl">I'm Rem! I stream on Twitch and make files ^~^</p>
-    </div>
-    <!-- SOCIAL MEDIA BUTTONS -->
-    <div class="flex flex-wrap justify-center gap-4 mt-6">
-      <a href="https://www.twitch.tv/thatdimensionalfox" target="_blank" class="w-32 h-32 bg-[var(--purple)] text-white rounded-lg flex flex-col items-center justify-center shadow hover:bg-[var(--purple-hover)] transition">
-        <i data-lucide="twitch" class="w-8 h-8 mb-2"></i>
-        <span class="text-sm font-semibold">thatdimensionalfox</span>
-        <p class="text-xs mt-1 text-center px-1">Twitch</p>
-      </a>
-      <a href="https://twitter.com/dimensionalfox" target="_blank" class="w-32 h-32 bg-[var(--blue)] text-white rounded-lg flex flex-col items-center justify-center shadow hover:bg-[var(--blue-hover)] transition">
-        <i data-lucide="twitter" class="w-8 h-8 mb-2"></i>
-        <span class="text-sm font-semibold">dimensionalfox</span>
-        <p class="text-xs mt-1 text-center px-1">Main Twitter</p>
-      </a>
-      <a href="https://twitter.com/thathiddenfox" target="_blank" class="w-32 h-32 bg-[var(--blue)] text-white rounded-lg flex flex-col items-center justify-center shadow hover:bg-[var(--blue-hover)] transition">
-        <i data-lucide="twitter" class="w-8 h-8 mb-2"></i>
-        <span class="text-sm font-semibold">thathiddenfox</span>
-        <p class="text-xs mt-1 text-center px-1">NSFW Twitter</p>
-      </a>
-      <a href="https://bsky.app/profile/thatdimensionalfox.bsky.social" target="_blank" class="w-32 h-32 bg-[var(--sky)] text-white rounded-lg flex flex-col items-center justify-center shadow hover:bg-[var(--sky-hover)] transition">
-        <i data-lucide="cloud" class="w-8 h-8 mb-2"></i>
-        <span class="text-sm font-semibold">thatdimensionalfox</span>
-        <p class="text-xs mt-1 text-center px-1">Bluesky</p>
-      </a>
-      <a href="https://bsky.app/profile/thatmysteriousfox.bsky.social" target="_blank" class="w-32 h-32 bg-[var(--sky)] text-white rounded-lg flex flex-col items-center justify-center shadow hover:bg-[var(--sky-hover)] transition">
-        <i data-lucide="cloud" class="w-8 h-8 mb-2"></i>
-        <span class="text-sm font-semibold">thatmysteriousfox</span>
-        <p class="text-xs mt-1 text-center px-1">NSFW Bluesky</p>
-      </a>
-      <a href="https://ko-fi.com/thatdimensionalfox" target="_blank" class="w-32 h-32 bg-[var(--kofi)] text-white rounded-lg flex flex-col items-center justify-center shadow hover:bg-[var(--kofi-hover)] transition">
-        <i data-lucide="coffee" class="w-8 h-8 mb-2"></i>
-        <span class="text-sm font-semibold">thatdimensionalfox</span>
-        <p class="text-xs mt-1 text-center px-1">Ko-Fi</p>
-      </a>
-      <a href="https://throne.com/thatmysteriousfox" target="_blank" class="w-32 h-32 bg-[var(--throne)] text-white rounded-lg flex flex-col items-center justify-center shadow hover:bg-[var(--throne-hover)] transition">
-        <i data-lucide="crown" class="w-8 h-8 mb-2"></i>
-        <span class="text-sm font-semibold">thatmysteriousfox</span>
-        <p class="text-xs mt-1 text-center px-1">Throne</p>
-      </a>
-    </div>
-  </header>
+  (function () {
+    const toggle = document.getElementById('sidenavToggle');
+    // Use documentElement or body to hold the state class
+    const host = document.documentElement; // <html> element
+    const STORAGE_KEY = 'sidenav-hidden';
 
-  <!-- BUTTONS -->
-  <div class="flex justify-center mt-6 gap-4">
-    <button id="gallery-btn" onclick="switchTab('gallery')" class="tab-btn px-4 py-2 rounded bg-[var(--tab-bg)] text-[var(--tab-text)]">Gallery</button>
-    <button id="files-btn" onclick="switchTab('files')" class="tab-btn px-4 py-2 rounded bg-[var(--tab-bg)] text-[var(--tab-text)]">Files</button>
-    <button id="writing-btn" onclick="switchTab('writing')" class="tab-btn px-4 py-2 rounded bg-[var(--tab-bg)] text-[var(--tab-text)]">Writing</button>
-  </div>
-  
-  <!-- NSFW TOGGLE -->
-  <section id="gallery-tab" class="p-4 hidden">
-    <div class="flex justify-center mb-4">
-      <button onclick="toggleNSFW()" class="px-4 py-2 bg-[var(--button)] text-white rounded hover:bg-[var(--button-hover)]">
-        Toggle NSFW
-      </button>
-    </div>
-    <div id="gallery-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"></div>
-  </section>
+    toggle.addEventListener('click', function () {
+      const hidden = host.classList.toggle('sidenav-hidden');
+      toggle.setAttribute('aria-expanded', String(!hidden));
+      // optional: persist state
+      try { localStorage.setItem(STORAGE_KEY, String(hidden)); } catch (e) {}
+    });
 
-  <!-- FILES -->
-  <section id="files-tab" class="p-6 hidden">
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-      <div class="bg-[var(--files-bg)] p-4 rounded shadow">
-        <h3 class="font-semibold text-xl">Desktop Pet [NSFW]</h3>
-        <p class="text-[var(--text-light)]">A desktop pet that chills on your desktop</p>
-        <a href="files/pet.exe" download class="mt-2 inline-block bg-[var(--button)] hover:bg-[var(--button-hover)] text-white px-4 py-2 rounded shadow">Download</a>
-      </div>
+  })();
+</script>
 
-      <div class="bg-[var(--files-bg)] p-4 rounded shadow">
-        <h3 class="font-semibold text-xl">Good Girl [HYPNO]</h3>
-        <p class="text-[var(--text-light)]">Your computer is mine... and so is your mind~</p>
-        <a href="files/Good Girl.zip" download class="mt-2 inline-block bg-[var(--button)] hover:bg-[var(--button-hover)] text-white px-4 py-2 rounded shadow">Download</a>
-      </div>
-
-      <div class="bg-[var(--files-bg)] p-4 rounded shadow">
-        <h3 class="font-semibold text-xl">Doxxer [BLACKMAIL]</h3>
-        <p class="text-[var(--text-light)]">Sends me your current location.</p>
-        <a href="files/doxxer.exe" download class="mt-2 inline-block bg-[var(--button)] hover:bg-[var(--button-hover)] text-white px-4 py-2 rounded shadow">Download</a>
-      </div>
-
-      <div class="bg-[var(--files-bg)] p-4 rounded shadow">
-        <h3 class="font-semibold text-xl">Censorslut [CENSORS]</h3>
-        <p class="text-[var(--text-light)]">For those who like censor porn... or who need some convincing~</p>
-        <a href="files/CensorSlut.exe" download class="mt-2 inline-block bg-[var(--button)] hover:bg-[var(--button-hover)] text-white px-4 py-2 rounded shadow">Download</a>
-      </div>
-
-      <div class="bg-[var(--files-bg)] p-4 rounded shadow">
-        <h3 class="font-semibold text-xl">
-          File Stealer [FINDOM]
-        </h3>
-        <p class="text-[var(--text-light)]">
-          The following file gives me access to whatever Encrypts a file of your choice and sends it to me, pay to get it back.
-        </p>
-        <a href="files/File Stealer.zip" download class="mt-2 inline-block bg-[var(--button)] hover:bg-[var(--button-hover)] text-white px-4 py-2 rounded shadow">Download</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- WRITING -->
-<section id="writing-tab" class="p-6 hidden">
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id="writing-list">
-    <!-- Writing entries will be loaded here -->
-  </div>
-  <div id="writing-content" class="mt-8 bg-white p-6 rounded shadow text-black hidden">
-    <button onclick="closeWriting()" class="mb-4 px-4 py-2 bg-[var(--button)] hover:bg-[var(--button-hover)] text-white rounded shadow">Back to List</button>
-    <pre id="writing-text" class="whitespace-pre-wrap text-sm"></pre>
-  </div>
-</section>
-
-
-  <footer class="text-center p-4 text-sm text-[var(--text-lightest)] mt-10">
-    &copy; 2025 ThatDimensionalFox. All rights reserved.
-  </footer>
-
-  <script>
-    generateGallery();
-  </script>
-  <script>
-    lucide.createIcons();
-  </script>
-</body>
-</html>
+    </body>
+    <link rel="stylesheet" href="styles.css">
+    </html>
