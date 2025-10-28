@@ -18,7 +18,7 @@
     --background-image: url(background.png);
 
     --sidenav-width: 10%; /* keep in sync with your .sidenav width */
-    --transition-speed: 280ms;
+    --transition-speed: 1500ms;
 }
 
 
