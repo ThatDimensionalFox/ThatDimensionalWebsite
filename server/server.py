@@ -1,9 +1,4 @@
 #!/usr/bin/env python3
-"""
-server.py
-Flask server implementing OAuth popup login for Discord and Twitter (OAuth2 PKCE),
-storing users in SQLite, and returning a popup HTML page to postMessage back to opener.
-"""
 
 import os
 import sqlite3
@@ -29,7 +24,7 @@ load_dotenv()
 APP_SECRET = os.environ.get("FLASK_SECRET", secrets.token_hex(32))
 DISCORD_CLIENT_ID = os.environ.get("DISCORD_CLIENT_ID", "")
 DISCORD_CLIENT_SECRET = os.environ.get("DISCORD_CLIENT_SECRET", "")
-DISCORD_REDIRECT_URI = os.environ.get("DISCORD_REDIRECT_URI", "http://localhost:5000/auth/discord/callback")
+DISCORD_REDIRECT_URI = os.environ.get("DISCORD_REDIRECT_URI", "https://discord.com/oauth2/authorize?client_id=1432866075078299648&response_type=code&redirect_uri=https%3A%2F%2Fthatdimensionalwebsite.com%2F&scope=identify+email+openid")
 
 TWITTER_CLIENT_ID = os.environ.get("TWITTER_CLIENT_ID", "")
 TWITTER_REDIRECT_URI = os.environ.get("TWITTER_REDIRECT_URI", "http://localhost:5000/auth/twitter/callback")

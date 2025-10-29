@@ -43,11 +43,12 @@ html.sidenav-hidden {
 
 body{
     margin-left: var(--sidenav-width);
+    margin-right: 15%;
     transition: margin-left var(--transition-speed) cubic-bezier(.2,.9,.2,1);
     box-sizing: border-box;    
     padding: 25px;
     background-image: var(--background-image);
-    width: 99%;
+    min-width: 99%;
     min-height: 96%;
     border:50px var(--color-grey);
     border-radius: 25px;
