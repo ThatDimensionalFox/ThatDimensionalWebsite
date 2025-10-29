@@ -23,6 +23,7 @@
         title="Toggle sidebar">
   <i data-lucide="menu"></i>
   <span class="sr-only">Toggle sidebar</span>
+
 </button>          
     <div class="grid-container">
         <!-- Side navigation -->
@@ -30,9 +31,42 @@
     <nav class="sidenav" aria-label="Primary">
     <a href="#/home" class="nav-link" role="button" tabindex="0">Home</a>
     <a href="#/gallery" class="nav-link" role="button" tabindex="0">Gallery</a>
-    <a href="#/files" class="nav-link" role="button" tabindex="0">Files</a>
+    <!-- <a href="#/files" class="nav-link" role="button" tabindex="0">Files</a> -->
     <a href="#/writing" class="nav-link" role="button" tabindex="0">Writing</a>
+<!-- account info -->
+<div id="account-area" class="sidenav-account">
+<!-- provider login buttons (inside your sidenav account area) -->
+<div id="anon-controls">
+  <div>
+    <button class="oauth-btn" data-provider="discord">Log in with Discord</button>
+    <button class="oauth-btn" data-provider="twitter">Log in with Twitter</button>
+  </div>
+</div>
+
+<div id="user-controls" style="display:none;">
+  <img id="account-avatar" src="" alt="avatar" style="width:48px;height:48px;border-radius:8px;display:block;margin:0 auto 6px;">
+  <div id="account-username" style="font-weight:700;color:#ddd;">Username</div>
+  <div style="font-size:0.85rem;color:#aaa;">Level <span id="account-level">1</span></div>
+
+  <div style="margin-top:6px;">
+    <div style="background:#222;border-radius:999px;height:12px;overflow:hidden;">
+      <div id="xp-bar" style="height:100%;width:10%;background:linear-gradient(90deg,var(--purple),var(--blue));"></div>
+    </div>
+    <div style="font-size:0.8rem;color:#999;margin-top:4px;">
+      <span id="xp-text">0 XP</span>
+    </div>
+  </div>
+
+    <div style="margin-top:8px;">
+      <button id="logout-btn" class="nav-link" style="width:80%;">Logout</button>
+    </div>
+  </div>
+</div>
+
+    
     </nav>
+
+  
 
         <!-- Page content -->
 <!-- Page content (REPLACE your existing .main block with this) -->
@@ -70,6 +104,29 @@
 
   })();
 </script>
+
+<!-- login/register modal -->
+<div id="auth-modal" class="auth-modal" style="display:none;position:fixed;inset:0;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:10000;">
+  <div style="width:360px;background:var(--color-grey);padding:1rem;border-radius:8px;color:#eee;">
+    <h3 id="auth-title">Login</h3>
+    <div id="auth-error" style="color:#ff9999;display:none;margin-bottom:6px;"></div>
+
+    <label>Username</label>
+    <input id="auth-username" type="text" style="width:100%;padding:8px;margin-bottom:8px;border-radius:4px;border:1px solid #333;background:#111;color:#fff" />
+
+    <label>Password</label>
+    <input id="auth-password" type="password" style="width:100%;padding:8px;margin-bottom:8px;border-radius:4px;border:1px solid #333;background:#111;color:#fff" />
+
+    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px;">
+      <button id="auth-toggle" class="nav-link" style="padding:6px 10px;">Switch to Register</button>
+      <button id="auth-submit" class="nav-link" style="padding:6px 10px;">Submit</button>
+    </div>
+
+    <button id="auth-close" style="margin-top:8px;background:transparent;border:none;color:#aaa;">Close</button>
+  </div>
+</div>
+<script src="/account.js" defer></script>
+
 
     </body>
     <link rel="stylesheet" href="styles.css">

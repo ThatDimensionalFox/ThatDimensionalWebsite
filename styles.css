@@ -114,7 +114,23 @@ p {
   box-shadow: 0 6px 18px rgba(0,0,0,0.18);
 }
 
+.sidenav-account {
+  position: absolute;
+  bottom: 1%;
+  width: 100%;
+  left:0%;
+}
 
+.sidenav-account a:hover{
+    padding: 6px 8px 6px 16px;
+  padding-left: 15%;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  overflow: auto;
+
+}
 
 /* The navigation menu links */
 .sidenav a {
@@ -142,7 +158,8 @@ p {
 }
 
 /* make the nav links look like buttons and grow on hover */
-.sidenav .nav-link {
+.sidenav .nav-link,
+.oauth-btn  {
   display: inline-flex;
   width: 75%;
   align-items: center;
@@ -167,7 +184,8 @@ p {
 
 /* subtle hover/focus effect: grow slightly, lift, and change bg */
 .sidenav .nav-link:hover,
-.sidenav .nav-link:focus {
+.sidenav .nav-link:focus,
+.oauth-btn:hover {
   transform: scale(1.06);
   color: #ffffff;                           /* color of text when highlighted*/
   background-color: var(--navbar-button-highlighted); /* color of button when hovered */
