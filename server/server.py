@@ -12,7 +12,7 @@ from urllib.parse import urlencode
 import requests
 from flask import (
     Flask, session, redirect, request, jsonify, g,
-    render_template_string, url_for
+    render_template_string, url_for, render_template
 )
 from flask_session import Session
 from dotenv import load_dotenv
@@ -32,7 +32,7 @@ TWITTER_REDIRECT_URI = os.environ.get("TWITTER_REDIRECT_URI", "http://localhost:
 DATABASE = os.path.join(os.path.dirname(__file__), "data", "users.db")
 os.makedirs(os.path.dirname(DATABASE), exist_ok=True)
 
-app = Flask(__name__, static_folder=None)
+app = Flask(__name__, static_folder='static')
 app.secret_key = APP_SECRET
 app.config["SESSION_TYPE"] = "filesystem"   # simple, server-side sessions
 app.config["SESSION_PERMANENT"] = False
@@ -356,8 +356,8 @@ def auth_twitter_callback():
 # Root / quick health
 # -------------------------
 @app.route("/")
-def index():
-    return jsonify({"status": "ok", "message": "OAuth server running. Use /auth/discord or /auth/twitter"})
+def home():
+   return render_template('test.html')
 
 # -------------------------
 # Run
