@@ -1,0 +1,76 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ThatDimensionalWebsite</title>
+            <script src="https://cdn.tailwindcss.com"></script>
+            <script src="https://unpkg.com/lucide@latest"></script>
+
+            <style>
+                h2{
+                    text-align: center;
+                }
+            </style>
+    </head>
+
+    <body>  
+        <!-- Toggle button: top-right -->
+<button id="sidenavToggle"
+        class="sidenav-toggle"
+        aria-controls="Primary"
+        aria-expanded="true"
+        title="Toggle sidebar">
+  <i data-lucide="menu"></i>
+  <span class="sr-only">Toggle sidebar</span>
+</button>          
+    <div class="grid-container">
+        <!-- Side navigation -->
+    <!-- Replace existing .sidenav links with these -->
+    <nav class="sidenav" aria-label="Primary">
+    <a href="#/home" class="nav-link" role="button" tabindex="0">Home</a>
+    <a href="#/gallery" class="nav-link" role="button" tabindex="0">Gallery</a>
+    <a href="#/files" class="nav-link" role="button" tabindex="0">Files</a>
+    <a href="#/writing" class="nav-link" role="button" tabindex="0">Writing</a>
+    </nav>
+
+        <!-- Page content -->
+<!-- Page content (REPLACE your existing .main block with this) -->
+<div class="main">
+  <!-- <header>
+    <h2 id="page-title">Welcome</h2>
+  </header> -->
+
+  <!-- This is the ONLY area that will be replaced on route changes -->
+  <main id="page-content" tabindex="-1" class="mt-4">
+    <!-- initial fallback content will be replaced by pages/home.html -->
+    <p>Loading...</p>
+  </main>
+</div>
+    </div>
+    <script src="content-loader.js" defer></script>
+    <script>
+  // init lucide icons (if using lucide)
+  if (window.lucide) {
+    try { lucide.replace(); } catch (e) { /* ignore */ }
+  }
+
+  (function () {
+    const toggle = document.getElementById('sidenavToggle');
+    // Use documentElement or body to hold the state class
+    const host = document.documentElement; // <html> element
+    const STORAGE_KEY = 'sidenav-hidden';
+
+    toggle.addEventListener('click', function () {
+      const hidden = host.classList.toggle('sidenav-hidden');
+      toggle.setAttribute('aria-expanded', String(!hidden));
+      // optional: persist state
+      try { localStorage.setItem(STORAGE_KEY, String(hidden)); } catch (e) {}
+    });
+
+  })();
+</script>
+
+    </body>
+    <link rel="stylesheet" href="styles.css">
+    </html>
