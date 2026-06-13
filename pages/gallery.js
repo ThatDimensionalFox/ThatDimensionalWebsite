@@ -38,6 +38,14 @@ window.pageInit = (function () {
       nsfw: true 
     },
     { 
+      src: 'images/NSFW/arachna.png', 
+      title: 'Arachna Drone Suit', 
+      artist: 'A guy somewhere', 
+      artistLink: 'https://bsky.app/profile/a-guy-somewhere.bsky.social', 
+      description: "Drone suits usually aren't made for multiple arms, but this one suits Arachna quite well, don't you think~?", 
+      nsfw: true 
+    },
+    { 
       src: 'images/NSFW/lovelock-liquidlatex.png', 
       title: 'Rem coated in Liquid Latex', 
       artist: 'Lovelock', 
