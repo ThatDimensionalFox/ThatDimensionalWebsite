@@ -38,38 +38,6 @@ window.pageInit = (function () {
       nsfw: false 
     },
     { 
-      src: 'images/lovelock-paws.png', 
-      title: 'Rem Paws', 
-      artist: 'Lovelock', 
-      artistLink: 'https://lovelockart.carrd.co/', 
-      description: "Don't my paws look tasty~?", 
-      nsfw: false 
-    },
-    { 
-      src: 'images/lovelock-hypno.jpg', 
-      title: 'Rem Hypno', 
-      artist: 'Lovelock', 
-      artistLink: 'https://lovelockart.carrd.co/', 
-      description: "Am I hypnotising, or getting hypnotised? I'll let you decide~", 
-      nsfw: false 
-    },
-    { 
-      src: 'images/lovelock-muzzle.jpg', 
-      title: 'Rem Muzzle', 
-      artist: 'Lovelock', 
-      artistLink: 'https://lovelockart.carrd.co/', 
-      description: "Hey, don't muzzle me! I promise I won't talk back ag- mmmmhhhffff!", 
-      nsfw: false 
-    },
-    { 
-      src: 'images/sleeplesskiwi-headshot.png', 
-      title: 'Rem (Cool)', 
-      artist: 'Sleepless Kiwi', 
-      artistLink: 'https://sleeplesskiwi.carrd.co/', 
-      description: "Got this as a bonus for donating for someones car repairs. Thanks Kiwi!", 
-      nsfw: false 
-    },
-    { 
       src: 'images/bethany-giftpfp.png', 
       title: 'Rem PFP Art', 
       artist: 'BethanyGC', 
@@ -124,7 +92,39 @@ window.pageInit = (function () {
       artistLink: 'https://x.com/rem5041', 
     description: "Shh, don't tell anyone about that lovely bulge. if you do, you might end up with one... unless u want one too~", 
       nsfw: true 
-    },    
+    },
+    { 
+      src: 'images/lovelock-paws.png', 
+      title: 'Rem Paws', 
+      artist: 'Lovelock', 
+      artistLink: 'https://lovelockart.carrd.co/', 
+      description: "Don't my paws look tasty~?", 
+      nsfw: false 
+    },
+    { 
+      src: 'images/lovelock-hypno.jpg', 
+      title: 'Rem Hypno', 
+      artist: 'Lovelock', 
+      artistLink: 'https://lovelockart.carrd.co/', 
+      description: "Am I hypnotising, or getting hypnotised? I'll let you decide~", 
+      nsfw: false 
+    },
+    { 
+      src: 'images/sleeplesskiwi-headshot.png', 
+      title: 'Rem (Cool)', 
+      artist: 'Sleepless Kiwi', 
+      artistLink: 'https://sleeplesskiwi.carrd.co/', 
+      description: "Got this as a bonus for donating for someones car repairs. Thanks Kiwi!", 
+      nsfw: false 
+    },
+    { 
+      src: 'images/lovelock-muzzle.jpg', 
+      title: 'Rem Muzzle', 
+      artist: 'Lovelock', 
+      artistLink: 'https://lovelockart.carrd.co/', 
+      description: "Hey, don't muzzle me! I promise I won't talk back ag- mmmmhhhffff!", 
+      nsfw: false 
+    },
     { 
       src: 'images/sira-latexhypno.png', 
       title: 'Rem Latex', 
