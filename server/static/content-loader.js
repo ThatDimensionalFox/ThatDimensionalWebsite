@@ -8,6 +8,7 @@
   const defaultRoute = 'home';
   const contentEl = () => document.getElementById('page-content');
   const titleEl = () => document.getElementById('page-title');
+  const pageInitRegistry = {};
 
   function parseRoute() {
     // location.hash looks like "#/gallery" or "" -> fall back to default
@@ -77,6 +78,19 @@
     }
   }
 
+  function registerPageInit(route, initFn) {
+    if (typeof initFn === 'function') {
+      pageInitRegistry[route] = initFn;
+    }
+  }
+
+  function runPageInit(route) {
+    const initFn = pageInitRegistry[route] || window.pageInit;
+    if (typeof initFn === 'function') {
+      try { initFn(); } catch (e) { console.error('pageInit error', e); }
+    }
+  }
+
   // Dynamically append a <script> for page logic if file exists
   function loadPageScript(route) {
     return new Promise(async (resolve, reject) => {
@@ -91,8 +105,7 @@
 
       const existing = document.querySelector(`script[data-route="${route}"]`);
       if (existing) {
-        // script already loaded; optionally call an init if provided
-        if (window.pageInit && typeof window.pageInit === 'function') window.pageInit();
+        runPageInit(route);
         return resolve();
       }
 
@@ -101,9 +114,10 @@
       s.defer = true;
       s.dataset.route = route;
       s.onload = () => {
-        // If the page script exposes pageInit(), call it
+        // If the page script exposes pageInit(), register it for this route and call it.
         if (window.pageInit && typeof window.pageInit === 'function') {
-          try { window.pageInit(); } catch (e) { console.error('pageInit error', e); }
+          registerPageInit(route, window.pageInit);
+          runPageInit(route);
         }
         resolve();
       };
