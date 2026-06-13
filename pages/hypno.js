@@ -2,9 +2,9 @@ window.pageInit = (function () {
   const hypnoFiles = [
     {
       title: 'Hypno Standard',
-      description: 'A calm looping file with a gentle spiraling cadence.',
-      spoilerDescription: 'Soft induction phrasing and a light trance pulse.',
-      tags: ['ambient', 'soft', 'induction'],
+      description: 'Main file.',
+      spoilerDescription: 'Spoiler Description',
+      tags: ['base file hehe'],
       audio: 'Hypno/hypnostandardfile.wav',
       nsfw: false
     },
