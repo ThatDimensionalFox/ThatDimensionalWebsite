@@ -6,14 +6,6 @@ window.pageInit = (function () {
   // gallery data (use image paths relative to index.html)
   const galleryImages = [
     { 
-      src: 'images/bethany-hypno.png', 
-      title: 'Rem Pocketwatch', 
-      artist: 'BethanyGC', 
-      artistLink: 'https://bsky.app/profile/bethanisagoose.bsky.social', 
-      description: "My favorite hypnosis art I have ever gotten! Wish someone would do that to me- I mean what?", 
-      nsfw: false 
-    },
-    { 
       src: 'images/bethany-giftpfp.png', 
       title: 'Rem PFP Art', 
       artist: 'BethanyGC', 
@@ -68,6 +60,14 @@ window.pageInit = (function () {
       artistLink: 'https://x.com/rem5041', 
     description: "Shh, don't tell anyone about that lovely bulge. if you do, you might end up with one... unless u want one too~", 
       nsfw: true 
+    },
+    { 
+      src: 'images/bethany-hypno.png', 
+      title: 'Rem Pocketwatch', 
+      artist: 'BethanyGC', 
+      artistLink: 'https://bsky.app/profile/bethanisagoose.bsky.social', 
+      description: "My favorite hypnosis art I have ever gotten! Wish someone would do that to me- I mean what?", 
+      nsfw: false 
     },
     { 
       src: 'images/lovelock-paws.png', 
