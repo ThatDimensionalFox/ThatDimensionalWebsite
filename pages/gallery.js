@@ -20,15 +20,15 @@ window.pageInit = (function () {
       artistLink: 'https://lovelockart.carrd.co/', 
       description: "It's not often you see Rem dommy, but considering I'm a dom myself...~", 
       nsfw: true 
-    },    
+    },
     { 
-      src: 'images/NSFW/zoey-rem-drone.png', 
-      title: 'Rem Drone', 
+      src: 'images/NSFW/zoey-rubberskunk.png', 
+      title: 'Rem Rubberskunk', 
       artist: 'Zoeylycanbark', 
       artistLink: 'https://bsky.app/profile/zoeylycanbark.bsky.social', 
-      description: "These drone suits are just... so comfortable... maybe I should just let them slip it on me~", 
+      description: "Zoeyly has an... interesting obsession with Rubberskunks, so I let her show me a bit about them. That might've been a mistake~", 
       nsfw: true 
-    },
+    },    
     { 
       src: 'images/NSFW/timebutt-forest-watermark.png', 
       title: 'Rem + Nada Hypno', 
@@ -46,11 +46,11 @@ window.pageInit = (function () {
       nsfw: true 
     },    
     { 
-      src: 'images/NSFW/zoey-rubberskunk.png', 
-      title: 'Rem Rubberskunk', 
+      src: 'images/NSFW/zoey-rem-drone.png', 
+      title: 'Rem Drone', 
       artist: 'Zoeylycanbark', 
       artistLink: 'https://bsky.app/profile/zoeylycanbark.bsky.social', 
-      description: "Zoeyly has an... interesting obsession with Rubberskunks, so I let her show me a bit about them. That might've been a mistake~", 
+      description: "These drone suits are just... so comfortable... maybe I should just let them slip it on me~", 
       nsfw: true 
     },
     { 
