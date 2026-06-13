@@ -6,35 +6,11 @@ window.pageInit = (function () {
   // gallery data (use image paths relative to index.html)
   const galleryImages = [
     { 
-      src: 'images/duderedblue-kitsune.png', 
-      title: 'Rem Kitsune', 
-      artist: 'DudeRedBlue', 
-      artistLink: 'https://www.furaffinity.net/user/redbluedude/', 
-      description: "Kitsunes are a personal favorite, what can I say?", 
-      nsfw: false 
-    },
-    { 
-      src: 'images/NSFW/nasty-hypno.png', 
-      title: 'Rem Hypno Visor', 
-      artist: 'NaughtySwirls', 
-      artistLink: 'https://naughtyswirls.carrd.co/', 
-      description: "Good drones obey... I'm a good drone... good drones obey... I'm a good drone... ", 
-      nsfw: true 
-    },
-    { 
       src: 'images/bethany-hypno.png', 
       title: 'Rem Pocketwatch', 
       artist: 'BethanyGC', 
       artistLink: 'https://bsky.app/profile/bethanisagoose.bsky.social', 
       description: "My favorite hypnosis art I have ever gotten! Wish someone would do that to me- I mean what?", 
-      nsfw: false 
-    },
-    { 
-      src: 'images/lovelock-small.png', 
-      title: 'Rem Small', 
-      artist: 'Lovelock', 
-      artistLink: 'https://lovelockart.carrd.co/', 
-      description: "Hey, I'm down here! Hey!", 
       nsfw: false 
     },
     { 
@@ -102,11 +78,27 @@ window.pageInit = (function () {
       nsfw: false 
     },
     { 
+      src: 'images/NSFW/nasty-hypno.png', 
+      title: 'Rem Hypno Visor', 
+      artist: 'NaughtySwirls', 
+      artistLink: 'https://naughtyswirls.carrd.co/', 
+      description: "Good drones obey... I'm a good drone... good drones obey... I'm a good drone... ", 
+      nsfw: true 
+    },
+    { 
       src: 'images/lovelock-hypno.jpg', 
       title: 'Rem Hypno', 
       artist: 'Lovelock', 
       artistLink: 'https://lovelockart.carrd.co/', 
       description: "Am I hypnotising, or getting hypnotised? I'll let you decide~", 
+      nsfw: false 
+    },
+    { 
+      src: 'images/lovelock-small.png', 
+      title: 'Rem Small', 
+      artist: 'Lovelock', 
+      artistLink: 'https://lovelockart.carrd.co/', 
+      description: "Hey, I'm down here! Hey!", 
       nsfw: false 
     },
     { 
