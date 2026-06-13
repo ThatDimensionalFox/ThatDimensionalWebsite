@@ -38,6 +38,14 @@ window.pageInit = (function () {
       nsfw: true 
     },
     { 
+      src: 'images/NSFW/lovelock-liquidlatex.png', 
+      title: 'Rem coated in Liquid Latex', 
+      artist: 'Lovelock', 
+      artistLink: 'https://lovelockart.carrd.co/', 
+      description: "Liquid latex always seemed so inviting... but it r-really melts the m-mind, doesnt it...~?", 
+      nsfw: true 
+    },    
+    { 
       src: 'images/NSFW/zoey-rubberskunk.png', 
       title: 'Rem Rubberskunk', 
       artist: 'Zoeylycanbark', 
