@@ -1,0 +1,100 @@
+window.pageInit = (function () {
+  const hypnoFiles = [
+    {
+      title: 'Hypno Standard',
+      description: 'A calm looping file with a gentle spiraling cadence.',
+      spoilerDescription: 'Soft induction phrasing and a light trance pulse.',
+      tags: ['ambient', 'soft', 'induction'],
+      audio: 'Hypno/hypnostandardfile.wav',
+      nsfw: false
+    },
+    {
+      title: 'Hypno Standard (Stronger)',
+      description: 'A slightly more direct version for focused listening.',
+      spoilerDescription: 'Includes stronger trigger wording and a more persistent rhythm.',
+      tags: ['focus', 'direct', 'suggestive'],
+      audio: 'Hypno/hypnostandardfile.wav',
+      nsfw: true
+    }
+  ];
+
+  let showNSFW = false;
+
+  function generateHypnoFiles() {
+    const container = document.getElementById('hypno-container');
+    if (!container) return;
+
+    container.innerHTML = '';
+    const filesToShow = showNSFW ? hypnoFiles : hypnoFiles.filter(file => !file.nsfw);
+
+    filesToShow.forEach(file => {
+      const card = document.createElement('article');
+      card.className = 'rounded-lg border border-pink-500/30 bg-zinc-900/70 p-4 shadow-lg';
+
+      const title = document.createElement('h4');
+      title.className = 'font-semibold text-lg text-pink-200';
+      title.textContent = file.title || 'Untitled Hypno File';
+      card.appendChild(title);
+
+      const description = document.createElement('p');
+      description.className = 'mt-2 text-sm text-gray-300';
+      description.textContent = file.description || '';
+      card.appendChild(description);
+
+      const spoiler = document.createElement('p');
+      spoiler.className = 'mt-2 text-sm text-amber-200/90';
+      spoiler.textContent = file.spoilerDescription || '';
+      card.appendChild(spoiler);
+
+      const tagContainer = document.createElement('div');
+      tagContainer.className = 'mt-3 flex flex-wrap gap-2';
+      (file.tags || []).forEach(tag => {
+        const badge = document.createElement('span');
+        badge.className = 'rounded-full bg-pink-600/20 px-2 py-1 text-xs text-pink-100';
+        badge.textContent = tag;
+        tagContainer.appendChild(badge);
+      });
+      card.appendChild(tagContainer);
+
+      const audioWrap = document.createElement('div');
+      audioWrap.className = 'mt-4';
+      const audio = document.createElement('audio');
+      audio.controls = true;
+      audio.preload = 'none';
+      audio.className = 'w-full';
+      const source = document.createElement('source');
+      source.src = file.audio;
+      source.type = 'audio/wav';
+      audio.appendChild(source);
+      audio.textContent = 'Your browser does not support the audio element.';
+      audioWrap.appendChild(audio);
+      card.appendChild(audioWrap);
+
+      container.appendChild(card);
+    });
+  }
+
+  function toggleNSFW() {
+    showNSFW = !showNSFW;
+    updateToggleText();
+    generateHypnoFiles();
+    return showNSFW;
+  }
+
+  function updateToggleText() {
+    const btn = document.getElementById('nsfw-toggle');
+    if (!btn) return;
+    btn.textContent = showNSFW ? 'Hide NSFW' : 'Show NSFW';
+  }
+
+  return function pageInit() {
+    const toggleBtn = document.getElementById('nsfw-toggle');
+    if (toggleBtn) {
+      toggleBtn.removeEventListener('click', toggleNSFW);
+      toggleBtn.addEventListener('click', toggleNSFW);
+      updateToggleText();
+    }
+
+    generateHypnoFiles();
+  };
+})();
