@@ -10,7 +10,7 @@ window.pageInit = (function () {
       title: 'Rem Ref Sheet', 
       artist: 'Ratman', 
       artistLink: '', 
-      description: 'Heres Rem, a multiversal traveller (and my main sona!). Hes a mix of a Fennec Fox, Kangaroo and Silk Moth.', 
+      description: "Here's Rem, a multiversal traveller. They're a mix of a Fennec Fox, Kangaroo and Silk Moth.", 
       nsfw: false 
     },
     { 
@@ -18,7 +18,7 @@ window.pageInit = (function () {
       title: 'Arachna Ref Sheet', 
       artist: 'BethanyGC', 
       artistLink: 'https://bsky.app/profile/bethanisagoose.bsky.social', 
-      description: 'Heres Arachna, the multiverses greatest mercenary! Dispite Rem being a pacifist, the two are best of friends and share a cabin out in the multiversal void.', 
+      description: "Here's Arachna, the multiverses greatest mercenary! Dispite Rem being a pacifist, the two are best of friends and share a cabin out in the multiversal void.", 
       nsfw: false 
     },
     { 
@@ -26,7 +26,7 @@ window.pageInit = (function () {
       title: 'Selene the Zoroark', 
       artist: 'BethanyGC', 
       artistLink: 'https://bsky.app/profile/bethanisagoose.bsky.social', 
-      description: 'My pokesona! They use their illusions to hypnotise people (though they are extra susceptible themselves)', 
+      description: "My pokesona! She uses her illusions to hypnotise people (though she's extra susceptible themselves)", 
       nsfw: false 
     },
     { 
@@ -34,7 +34,7 @@ window.pageInit = (function () {
       title: 'Selene Nulge', 
       artist: 'Kippz', 
       artistLink: 'https://bsky.app/profile/kippz.bsky.social', 
-      description: 'Seems that those spirals were too enticing for Selene. Hypnotised herself while stuck as a latex zoroark~', 
+      description: "Seems those spirals were too enticing for Selene. Hypnotised herself while stuck as a latex zoroark~", 
       nsfw: true 
     },
     { 
@@ -42,7 +42,7 @@ window.pageInit = (function () {
       title: 'Rem Kitsune', 
       artist: 'DudeRedBlue', 
       artistLink: 'https://www.furaffinity.net/user/redbluedude/', 
-      description: 'Kitsunes are a personal favorite, what can I say?', 
+      description: "Kitsunes are a personal favorite, what can I say?", 
       nsfw: false 
     },
     { 
@@ -50,7 +50,7 @@ window.pageInit = (function () {
       title: 'Rem Hypno Visor', 
       artist: 'NaughtySwirls', 
       artistLink: 'https://naughtyswirls.carrd.co/', 
-      description: 'Good drones obey... Im a good drone... good drones obey... Im a good drone... ', 
+      description: "Good drones obey... I'm a good drone... good drones obey... I'm a good drone... ", 
       nsfw: true 
     },
     { 
@@ -58,7 +58,7 @@ window.pageInit = (function () {
       title: 'Rem Pocketwatch', 
       artist: 'BethanyGC', 
       artistLink: 'https://bsky.app/profile/bethanisagoose.bsky.social', 
-      description: 'My favorate hypnosis art I have ever gotten! Wish someone would do that to me- I mean what?', 
+      description: "My favorite hypnosis art I have ever gotten! Wish someone would do that to me- I mean what?", 
       nsfw: false 
     },
     { 
@@ -66,7 +66,7 @@ window.pageInit = (function () {
       title: 'Rem Small', 
       artist: 'Lovelock', 
       artistLink: 'https://lovelockart.carrd.co/', 
-      description: 'Hey, Im down here! Hey!', 
+      description: "Hey, I'm down here! Hey!", 
       nsfw: false 
     },
     { 
@@ -74,7 +74,7 @@ window.pageInit = (function () {
       title: 'Rem Paws', 
       artist: 'Lovelock', 
       artistLink: 'https://lovelockart.carrd.co/', 
-      description: 'Dont my paws look tasty~?', 
+      description: "Don't my paws look tasty~?", 
       nsfw: false 
     },
     { 
@@ -82,7 +82,7 @@ window.pageInit = (function () {
       title: 'Rem Hypno', 
       artist: 'Lovelock', 
       artistLink: 'https://lovelockart.carrd.co/', 
-      description: 'Am I hypnotising, or getting hypnotised? Ill let you decide~', 
+      description: "Am I hypnotising, or getting hypnotised? I'll let you decide~", 
       nsfw: false 
     },
     { 
@@ -90,7 +90,7 @@ window.pageInit = (function () {
       title: 'Rem Muzzle', 
       artist: 'Lovelock', 
       artistLink: 'https://lovelockart.carrd.co/', 
-      description: 'Hey, dont muzzle me! I promise I wont talk back ag- mmmmhhhffff!', 
+      description: "Hey, don't muzzle me! I promise I won't talk back ag- mmmmhhhffff!", 
       nsfw: false 
     },
     { 
@@ -98,7 +98,7 @@ window.pageInit = (function () {
       title: 'Rem Latex', 
       artist: 'SiraWox', 
       artistLink: 'https://bsky.app/profile/sirawox.bsky.social', 
-      description: 'Rem accidentally got turned into latex... but they dont seem too unhappy about it~', 
+      description: "Rem accidentally got turned into latex... but they dont seem too unhappy about it~", 
       nsfw: false 
     },
     { 
@@ -106,7 +106,7 @@ window.pageInit = (function () {
       title: 'Rem (Cool)', 
       artist: 'Sleepless Kiwi', 
       artistLink: 'https://sleeplesskiwi.carrd.co/', 
-      escription: 'Got this as a bonus for donating for someones car repairs. Thanks Kiwi!', 
+      description: "Got this as a bonus for donating for someones car repairs. Thanks Kiwi!", 
       nsfw: false 
     },
     { 
@@ -114,7 +114,7 @@ window.pageInit = (function () {
       title: 'Rem Hottub', 
       artist: 'Ratman', 
       artistLink: '', 
-      description: 'Relaxing with Serahbellite and Alexis Rose!', 
+      description: "Relaxing with Serahbellite and Alexis Rose!", 
       nsfw: false 
     },
     { 
@@ -122,7 +122,7 @@ window.pageInit = (function () {
       title: 'Rem & Wolfstorm', 
       artist: 'Ratman', 
       artistLink: '', 
-      description: 'Liquid metal sonas sure are fun when they coat you~', 
+      description: "Liquid metal sonas sure are fun when they coat you~", 
       nsfw: false 
     },
     { 
@@ -130,7 +130,7 @@ window.pageInit = (function () {
       title: 'Rem Chastity', 
       artist: 'Ratman', 
       artistLink: '', 
-      description: 'The first NSFW art I ever commissioned. Also started my love for chastity~', 
+      description: "The first NSFW art I ever commissioned. Also started my love for chastity~", 
       nsfw: true 
     }
   ];
