@@ -6,38 +6,6 @@ window.pageInit = (function () {
   // gallery data (use image paths relative to index.html)
   const galleryImages = [
     { 
-      src: 'images/ratman-remref.jpg', 
-      title: 'Rem Ref Sheet', 
-      artist: 'Ratman', 
-      artistLink: '', 
-      description: "Here's Rem, a multiversal traveller. They're a mix of a Fennec Fox, Kangaroo and Silk Moth.", 
-      nsfw: false 
-    },
-    { 
-      src: 'images/bethany-arachnaref.png', 
-      title: 'Arachna Ref Sheet', 
-      artist: 'BethanyGC', 
-      artistLink: 'https://bsky.app/profile/bethanisagoose.bsky.social', 
-      description: "Here's Arachna, the multiverses greatest mercenary! Dispite Rem being a pacifist, the two are best of friends and share a cabin out in the multiversal void.", 
-      nsfw: false 
-    },
-    { 
-      src: 'images/bethany-zoroark.png', 
-      title: 'Selene the Zoroark', 
-      artist: 'BethanyGC', 
-      artistLink: 'https://bsky.app/profile/bethanisagoose.bsky.social', 
-      description: "My pokesona! She uses her illusions to hypnotise people (though she's extra susceptible themselves)", 
-      nsfw: false 
-    },
-    { 
-      src: 'images/NSFW/kippz-zoroark.png', 
-      title: 'Selene Nulge', 
-      artist: 'Zoeylycanbark', 
-      artistLink: 'https://bsky.app/profile/kippz.bsky.social', 
-      description: "Seems those spirals were too enticing for Selene. Hypnotised herself while stuck as a latex zoroark~", 
-      nsfw: true 
-    },
-    { 
       src: 'images/duderedblue-kitsune.png', 
       title: 'Rem Kitsune', 
       artist: 'DudeRedBlue', 
@@ -94,44 +62,12 @@ window.pageInit = (function () {
       nsfw: false 
     },
     { 
-      src: 'images/sira-latexhypno.png', 
-      title: 'Rem Latex', 
-      artist: 'SiraWox', 
-      artistLink: 'https://bsky.app/profile/sirawox.bsky.social', 
-      description: "Rem accidentally got turned into latex... but they dont seem too unhappy about it~", 
-      nsfw: false 
-    },
-    { 
       src: 'images/sleeplesskiwi-headshot.png', 
       title: 'Rem (Cool)', 
       artist: 'Sleepless Kiwi', 
       artistLink: 'https://sleeplesskiwi.carrd.co/', 
       description: "Got this as a bonus for donating for someones car repairs. Thanks Kiwi!", 
       nsfw: false 
-    },
-    { 
-      src: 'images/ratman-hottub.png', 
-      title: 'Rem Hottub', 
-      artist: 'Ratman', 
-      artistLink: '', 
-      description: "Relaxing with Serahbellite and Alexis Rose!", 
-      nsfw: false 
-    },
-    { 
-      src: 'images/ratman-metal.png', 
-      title: 'Rem & Wolfstorm', 
-      artist: 'Ratman', 
-      artistLink: '', 
-      description: "Liquid metal sonas sure are fun when they coat you~", 
-      nsfw: false 
-    },
-    { 
-      src: 'images/NSFW/ratman-chastity.png', 
-      title: 'Rem Chastity', 
-      artist: 'Ratman', 
-      artistLink: '', 
-      description: "The first NSFW art I ever commissioned. Also started my love for chastity~", 
-      nsfw: true 
     },
     { 
       src: 'images/bethany-giftpfp.png', 
@@ -174,6 +110,14 @@ window.pageInit = (function () {
       nsfw: true 
     },
     { 
+      src: 'images/NSFW/kippz-zoroark.png', 
+      title: 'Selene Nulge', 
+      artist: 'Zoeylycanbark', 
+      artistLink: 'https://bsky.app/profile/kippz.bsky.social', 
+      description: "Seems those spirals were too enticing for Selene. Hypnotised herself while stuck as a latex zoroark~", 
+      nsfw: true 
+    },
+    { 
       src: 'images/NSFW/Rem_Nun.png', 
       title: 'Rem Nun', 
       artist: 'THEREMIMAN', 
@@ -181,6 +125,62 @@ window.pageInit = (function () {
     description: "Shh, don't tell anyone about that lovely bulge. if you do, you might end up with one... unless u want one too~", 
       nsfw: true 
     },    
+    { 
+      src: 'images/sira-latexhypno.png', 
+      title: 'Rem Latex', 
+      artist: 'SiraWox', 
+      artistLink: 'https://bsky.app/profile/sirawox.bsky.social', 
+      description: "Rem accidentally got turned into latex... but they dont seem too unhappy about it~", 
+      nsfw: false 
+    },
+    { 
+      src: 'images/ratman-metal.png', 
+      title: 'Rem & Wolfstorm', 
+      artist: 'Ratman', 
+      artistLink: '', 
+      description: "Liquid metal sonas sure are fun when they coat you~", 
+      nsfw: false 
+    },
+    { 
+      src: 'images/ratman-hottub.png', 
+      title: 'Rem Hottub', 
+      artist: 'Ratman', 
+      artistLink: '', 
+      description: "Relaxing with Serahbellite and Alexis Rose!", 
+      nsfw: false 
+    },
+    { 
+      src: 'images/NSFW/ratman-chastity.png', 
+      title: 'Rem Chastity', 
+      artist: 'Ratman', 
+      artistLink: '', 
+      description: "The first NSFW art I ever commissioned. Also started my love for chastity~", 
+      nsfw: true 
+    },
+    {
+      src: 'images/ratman-remref.jpg', 
+      title: 'Rem Ref Sheet', 
+      artist: 'Ratman', 
+      artistLink: '', 
+      description: "Here's Rem, a multiversal traveller. They're a mix of a Fennec Fox, Kangaroo and Silk Moth.", 
+      nsfw: false 
+    },
+    { 
+      src: 'images/bethany-arachnaref.png', 
+      title: 'Arachna Ref Sheet', 
+      artist: 'BethanyGC', 
+      artistLink: 'https://bsky.app/profile/bethanisagoose.bsky.social', 
+      description: "Here's Arachna, the multiverses greatest mercenary! Dispite Rem being a pacifist, the two are best of friends and share a cabin out in the multiversal void.", 
+      nsfw: false 
+    },
+    { 
+      src: 'images/bethany-zoroark.png', 
+      title: 'Selene the Zoroark', 
+      artist: 'BethanyGC', 
+      artistLink: 'https://bsky.app/profile/bethanisagoose.bsky.social', 
+      description: "My pokesona! She uses her illusions to hypnotise people (though she's extra susceptible themselves)", 
+      nsfw: false 
+    },
 
   ];
 
