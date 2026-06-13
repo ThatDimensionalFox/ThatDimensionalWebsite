@@ -32,7 +32,7 @@ window.pageInit = (function () {
     { 
       src: 'images/NSFW/kippz-zoroark.png', 
       title: 'Selene Nulge', 
-      artist: 'Kippz', 
+      artist: 'Zoeylycanbark', 
       artistLink: 'https://bsky.app/profile/kippz.bsky.social', 
       description: "Seems those spirals were too enticing for Selene. Hypnotised herself while stuck as a latex zoroark~", 
       nsfw: true 
@@ -132,7 +132,56 @@ window.pageInit = (function () {
       artistLink: '', 
       description: "The first NSFW art I ever commissioned. Also started my love for chastity~", 
       nsfw: true 
-    }
+    },
+    { 
+      src: 'images/bethany-giftpfp.png', 
+      title: 'Rem PFP Art', 
+      artist: 'BethanyGC', 
+      artistLink: 'https://bsky.app/profile/bethanisagoose.bsky.social', 
+      description: "A lovely piece of gift art Beth gave me one day. Love using it as a pfp <3", 
+      nsfw: false 
+    },
+    { 
+      src: 'images/Lovelock_Dom.png', 
+      title: 'Lovelock Dom', 
+      artist: 'Lovelock', 
+      artistLink: 'https://lovelockart.carrd.co/', 
+      description: "It's not often you see Rem dommy, but considering I'm a dom myself...~", 
+      nsfw: true 
+    },    
+    { 
+      src: 'images/NSFW/zoey-rem-drone.png', 
+      title: 'Rem Drone', 
+      artist: 'Zoeylycanbark', 
+      artistLink: 'https://bsky.app/profile/zoeylycanbark.bsky.social', 
+      description: "These drone suits are just... so comfortable... maybe I should just let them slip it on me~", 
+      nsfw: true 
+    },
+    { 
+      src: 'images/NSFW/timebutt-forest-watermark.png', 
+      title: 'Rem + Nada Hypno', 
+      artist: 'Timebutt', 
+      artistLink: 'https://bsky.app/profile/timebutt.bsky.social', 
+      description: "The woods is such a calming atmosphere... n-nothing bad could happen out here, right~?", 
+      nsfw: true 
+    },
+    { 
+      src: 'images/NSFW/zoey-rubberskunk.png', 
+      title: 'Rem Rubberskunk', 
+      artist: 'Zoeylycanbark', 
+      artistLink: 'https://bsky.app/profile/zoeylycanbark.bsky.social', 
+      description: "Zoeyly has an... interesting obsession with Rubberskunks, so I let her show me a bit about them. That might've been a mistake~", 
+      nsfw: true 
+    },
+    { 
+      src: 'images/NSFW/Rem_Nun.png', 
+      title: 'Rem Nun', 
+      artist: 'THEREMIMAN', 
+      artistLink: 'https://x.com/rem5041', 
+    description: "Shh, don't tell anyone about that lovely bulge. if you do, you might end up with one... unless u want one too~", 
+      nsfw: true 
+    },    
+
   ];
 
   let showNSFW = false;
