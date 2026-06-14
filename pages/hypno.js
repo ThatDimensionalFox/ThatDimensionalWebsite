@@ -5,7 +5,7 @@ window.pageInit = (function () {
       description: 'Main file.',
       spoilerDescription: 'Spoiler Description',
       tags: ['base file hehe'],
-      audio: '/pages/audio-proxy.html',
+      audio: '/Hypno/hypnostandardfile.mp3',
       nsfw: false
     },
     {
@@ -13,33 +13,17 @@ window.pageInit = (function () {
       description: 'this is me testing.',
       spoilerDescription: 'test description.',
       tags: ['stuff!', 'things too!'],
-      audio: '/pages/audio-proxy.html',
+      audio: '/Hypno/hypnostandardfile.mp3',
       nsfw: true
     }
   ];
 
   let showNSFW = false;
 
-  function getSiteBasePath() {
-    const baseUri = document.baseURI || window.location.href;
-    const parsed = new URL(baseUri);
-    const pathname = parsed.pathname.replace(/\/+$/, '');
-    if (!pathname || pathname === '/') return '/';
-    const lastSegment = pathname.split('/').pop() || '';
-    if (lastSegment.includes('.')) {
-      return `${pathname.slice(0, pathname.lastIndexOf('/'))}/`;
-    }
-    return `${pathname}/`;
-  }
-
   function resolveAudioUrl(audioPath) {
     if (!audioPath) return '';
     if (/^(https?:)?\/\//i.test(audioPath)) return audioPath;
-
-    const normalizedPath = audioPath.replace(/^\.\//, '').replace(/^\//, '');
-    const basePath = getSiteBasePath();
-    const baseUrl = new URL(`${window.location.origin}${basePath}`);
-    return new URL(normalizedPath, baseUrl).toString();
+    return audioPath.startsWith('/') ? audioPath : `/${audioPath.replace(/^\.\//, '')}`;
   }
 
   function generateHypnoFiles() {
@@ -87,12 +71,9 @@ window.pageInit = (function () {
       audio.className = 'w-full';
       const resolvedAudioUrl = resolveAudioUrl(file.audio);
       audio.src = resolvedAudioUrl;
-      audio.setAttribute('controlsList', 'nodownload');
-      audio.load();
-      const mediaType = file.audio.toLowerCase().endsWith('.mp3') ? 'audio/mpeg' : 'audio/wav';
       const source = document.createElement('source');
       source.src = resolvedAudioUrl;
-      source.type = mediaType;
+      source.type = resolvedAudioUrl.toLowerCase().endsWith('.mp3') ? 'audio/mpeg' : 'audio/wav';
       audio.appendChild(source);
 
       audioWrap.appendChild(audio);
