@@ -128,6 +128,8 @@
         existing.remove();
       }
 
+      window.pageInit = null;
+
       const s = document.createElement('script');
       s.src = `${scriptUrl}?v=${Date.now()}`;
       s.defer = true;

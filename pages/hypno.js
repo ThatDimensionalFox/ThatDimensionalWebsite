@@ -5,7 +5,7 @@ window.pageInit = (function () {
       description: 'Main file.',
       spoilerDescription: 'Spoiler Description',
       tags: ['base file hehe'],
-      audio: 'Hypno/hypnostandardfile.wav',
+      audio: '/pages/audio-proxy.html',
       nsfw: false
     },
     {
@@ -13,7 +13,7 @@ window.pageInit = (function () {
       description: 'this is me testing.',
       spoilerDescription: 'test description.',
       tags: ['stuff!', 'things too!'],
-      audio: 'Hypno/hypnostandardfile.mp3',
+      audio: '/pages/audio-proxy.html',
       nsfw: true
     }
   ];
@@ -36,9 +36,10 @@ window.pageInit = (function () {
     if (!audioPath) return '';
     if (/^(https?:)?\/\//i.test(audioPath)) return audioPath;
 
+    const normalizedPath = audioPath.replace(/^\.\//, '').replace(/^\//, '');
     const basePath = getSiteBasePath();
     const baseUrl = new URL(`${window.location.origin}${basePath}`);
-    return new URL(audioPath.replace(/^\.?\//, ''), baseUrl).toString();
+    return new URL(normalizedPath, baseUrl).toString();
   }
 
   function generateHypnoFiles() {
@@ -46,6 +47,7 @@ window.pageInit = (function () {
     if (!container) return;
 
     container.innerHTML = '';
+    container.dataset.ready = 'true';
     const filesToShow = showNSFW ? hypnoFiles : hypnoFiles.filter(file => !file.nsfw);
 
     filesToShow.forEach(file => {
