@@ -72,15 +72,13 @@ window.pageInit = (function () {
       const resolvedAudioUrl = resolveAudioUrl(file.audio);
       audio.src = resolvedAudioUrl;
       audio.setAttribute('controlsList', 'nodownload');
+      const mediaType = file.audio.toLowerCase().endsWith('.mp3') ? 'audio/mpeg' : 'audio/wav';
       const source = document.createElement('source');
       source.src = resolvedAudioUrl;
-      source.type = file.audio.toLowerCase().endsWith('.mp3') ? 'audio/mpeg' : 'audio/wav';
+      source.type = mediaType;
       audio.appendChild(source);
-      const fallback = document.createElement('p');
-      fallback.className = 'mt-2 text-xs text-gray-400';
-      fallback.textContent = 'Your browser does not support the audio element.';
+
       audioWrap.appendChild(audio);
-      audioWrap.appendChild(fallback);
       card.appendChild(audioWrap);
 
       container.appendChild(card);
