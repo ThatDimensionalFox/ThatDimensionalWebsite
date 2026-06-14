@@ -9,10 +9,10 @@ window.pageInit = (function () {
       nsfw: false
     },
     {
-      title: 'Hypno Standard (Stronger)',
-      description: 'A slightly more direct version for focused listening.',
-      spoilerDescription: 'Includes stronger trigger wording and a more persistent rhythm.',
-      tags: ['focus', 'direct', 'suggestive'],
+      title: 'test',
+      description: 'this is me testing.',
+      spoilerDescription: 'test description.',
+      tags: ['stuff!', 'things too!'],
       audio: 'Hypno/hypnostandardfile.mp3',
       nsfw: true
     }
