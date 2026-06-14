@@ -13,7 +13,7 @@ window.pageInit = (function () {
       description: 'this is me testing.',
       spoilerDescription: 'test description.',
       tags: ['stuff!', 'things too!'],
-      audio: '/Hypno/test.wav',
+      audio: '/Hypno/test.mp3',
       nsfw: true
     }
   ];
