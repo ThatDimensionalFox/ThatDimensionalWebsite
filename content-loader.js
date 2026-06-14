@@ -105,12 +105,11 @@
 
       const existing = document.querySelector(`script[data-route="${route}"]`);
       if (existing) {
-        runPageInit(route);
-        return resolve();
+        existing.remove();
       }
 
       const s = document.createElement('script');
-      s.src = scriptUrl;
+      s.src = `${scriptUrl}?v=${Date.now()}`;
       s.defer = true;
       s.dataset.route = route;
       s.onload = () => {

@@ -5,7 +5,7 @@ window.pageInit = (function () {
       description: 'Main file.',
       spoilerDescription: 'Spoiler Description',
       tags: ['base file hehe'],
-      audio: 'Hypno/hypnostandardfile.wav',
+      audio: 'Hypno/hypnostandardfile.mp3',
       nsfw: false
     },
     {
@@ -13,12 +13,19 @@ window.pageInit = (function () {
       description: 'A slightly more direct version for focused listening.',
       spoilerDescription: 'Includes stronger trigger wording and a more persistent rhythm.',
       tags: ['focus', 'direct', 'suggestive'],
-      audio: 'Hypno/hypnostandardfile.wav',
+      audio: 'Hypno/hypnostandardfile.mp3',
       nsfw: true
     }
   ];
 
   let showNSFW = false;
+
+  function resolveAudioUrl(audioPath) {
+    if (!audioPath) return '';
+    if (/^(https?:)?\/\//i.test(audioPath)) return audioPath;
+    if (audioPath.startsWith('/')) return audioPath;
+    return `/${audioPath.replace(/^\.?\//, '')}`;
+  }
 
   function generateHypnoFiles() {
     const container = document.getElementById('hypno-container');
@@ -60,14 +67,20 @@ window.pageInit = (function () {
       audioWrap.className = 'mt-4';
       const audio = document.createElement('audio');
       audio.controls = true;
-      audio.preload = 'none';
+      audio.preload = 'metadata';
       audio.className = 'w-full';
+      const resolvedAudioUrl = resolveAudioUrl(file.audio);
+      audio.src = resolvedAudioUrl;
+      audio.setAttribute('controlsList', 'nodownload');
       const source = document.createElement('source');
-      source.src = file.audio;
-      source.type = 'audio/wav';
+      source.src = resolvedAudioUrl;
+      source.type = file.audio.toLowerCase().endsWith('.mp3') ? 'audio/mpeg' : 'audio/wav';
       audio.appendChild(source);
-      audio.textContent = 'Your browser does not support the audio element.';
+      const fallback = document.createElement('p');
+      fallback.className = 'mt-2 text-xs text-gray-400';
+      fallback.textContent = 'Your browser does not support the audio element.';
       audioWrap.appendChild(audio);
+      audioWrap.appendChild(fallback);
       card.appendChild(audioWrap);
 
       container.appendChild(card);
