@@ -16,6 +16,25 @@
     return raw ? raw.split('/')[0] : defaultRoute;
   }
 
+  function getSiteBasePath() {
+    const baseUri = document.baseURI || window.location.href;
+    const parsed = new URL(baseUri);
+    const pathname = parsed.pathname.replace(/\/+$/, '');
+    if (!pathname || pathname === '/') return '/';
+    const lastSegment = pathname.split('/').pop() || '';
+    if (lastSegment.includes('.')) {
+      return `${pathname.slice(0, pathname.lastIndexOf('/'))}/`;
+    }
+    return `${pathname}/`;
+  }
+
+  function resolveAssetUrl(assetPath) {
+    if (!assetPath) return '';
+    const basePath = getSiteBasePath();
+    const baseUrl = new URL(`${window.location.origin}${basePath}`);
+    return new URL(assetPath, baseUrl).toString();
+  }
+
   async function fetchText(url) {
     const r = await fetch(url, { cache: 'no-cache' });
     if (!r.ok) throw new Error(`Fetch ${url} failed: ${r.status}`);
@@ -34,7 +53,8 @@
     container.innerHTML = '<p>Loading...</p>';
 
     try {
-      const html = await fetchText(`pages/${route}.html`);
+      const htmlUrl = resolveAssetUrl(`pages/${route}.html`);
+      const html = await fetchText(htmlUrl);
       container.innerHTML = html;
     if (window.lucide && typeof window.lucide.createIcons === 'function') {
     window.lucide.createIcons();
@@ -94,7 +114,7 @@
   // Dynamically append a <script> for page logic if file exists
   function loadPageScript(route) {
     return new Promise(async (resolve, reject) => {
-      const scriptUrl = `pages/${route}.js`;
+      const scriptUrl = resolveAssetUrl(`pages/${route}.js`);
       try {
         // quick HEAD check to avoid 404 noisy errors (some hosts don't allow HEAD; if so skip)
         const head = await fetch(scriptUrl, { method: 'HEAD', cache: 'no-cache' });

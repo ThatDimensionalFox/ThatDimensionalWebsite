@@ -20,11 +20,25 @@ window.pageInit = (function () {
 
   let showNSFW = false;
 
+  function getSiteBasePath() {
+    const baseUri = document.baseURI || window.location.href;
+    const parsed = new URL(baseUri);
+    const pathname = parsed.pathname.replace(/\/+$/, '');
+    if (!pathname || pathname === '/') return '/';
+    const lastSegment = pathname.split('/').pop() || '';
+    if (lastSegment.includes('.')) {
+      return `${pathname.slice(0, pathname.lastIndexOf('/'))}/`;
+    }
+    return `${pathname}/`;
+  }
+
   function resolveAudioUrl(audioPath) {
     if (!audioPath) return '';
     if (/^(https?:)?\/\//i.test(audioPath)) return audioPath;
-    if (audioPath.startsWith('/')) return audioPath;
-    return `/${audioPath.replace(/^\.?\//, '')}`;
+
+    const basePath = getSiteBasePath();
+    const baseUrl = new URL(`${window.location.origin}${basePath}`);
+    return new URL(audioPath.replace(/^\.?\//, ''), baseUrl).toString();
   }
 
   function generateHypnoFiles() {
@@ -72,6 +86,7 @@ window.pageInit = (function () {
       const resolvedAudioUrl = resolveAudioUrl(file.audio);
       audio.src = resolvedAudioUrl;
       audio.setAttribute('controlsList', 'nodownload');
+      audio.load();
       const mediaType = file.audio.toLowerCase().endsWith('.mp3') ? 'audio/mpeg' : 'audio/wav';
       const source = document.createElement('source');
       source.src = resolvedAudioUrl;
