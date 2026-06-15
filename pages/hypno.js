@@ -1,19 +1,24 @@
 window.pageInit = (function () {
   const hypnoFiles = [
     {
-      title: 'Hypno Standard',
-      description: 'Main file.',
-      spoilerDescription: 'Spoiler Description',
-      tags: ['base file hehe'],
-      audio: '/Hypno/hypnostandardfile.mp3',
+      title: "Hypno Standard",
+      description: 
+        ["This file requires u to be comfortable and have minimal distractions.",
+        "Put your devices on Do Not Disturb, and don't be doing anything other than listen to this file once you click play (no texting or watching videos cutie <3). I recommend having your eyes closed.",
+        "Headphones are highly recommended.",
+        "Make sure you are comfortable, either laying on a bed of sitting in a chair with your eyes closed.",
+        "After listening, I would recommend listening to the file once a day for the next 3 days, and after then once a week, to help them stick long-term. This applies to all my files"],
+      spoilerDescription: ["Spoiler Description"],
+      tags: ["Hypnosis Audio", "Drop Trigger"],
+      audio: "/Hypno/hypnostandardfile.mp3",
       nsfw: false
     },
     {
-      title: 'test',
-      description: 'this is me testing.',
-      spoilerDescription: 'test description.',
-      tags: ['stuff!', 'things too!'],
-      audio: '/Hypno/test.mp3',
+      title: "test",
+      description: "this is me testing.",
+      spoilerDescription: "test description.",
+      tags: ["stuff!", "things too!"],
+      audio: "/Hypno/test.mp3",
       nsfw: true
     }
   ];
