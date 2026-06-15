@@ -5,7 +5,7 @@ window.pageInit = (function () {
       description: 'Main file.',
       spoilerDescription: 'Spoiler Description',
       tags: ['base file hehe'],
-      audio: '/Hypno/hypnostandardfile.wav',
+      audio: '/Hypno/hypnostandardfile.mp3',
       nsfw: false
     },
     {
