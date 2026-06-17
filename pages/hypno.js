@@ -2,7 +2,7 @@ window.pageInit = (function () {
   const hypnoFiles = [
     {
       slug: "hypno-standard",
-      title: "Hypno Standard",
+      title: "Base File",
       description: 
         ["Welcome to my first hypno file~ This file will act as a basis for the rest of my hypnosis files, as they will use the triggers from this file ^~^",
         "- This file requires u to be comfortable and have minimal distractions.",
@@ -18,7 +18,7 @@ window.pageInit = (function () {
     },
     {
       slug: "hypno-obey-trigger",
-      title: "Hypno OBEY Trigger",
+      title: "OBEY Trigger",
       description: 
         ["Make sure to listen to the first file before this one, as this uses triggers from that original file. It's shorter than the first file, roughly 10mins <3",
         "- This file requires u to be comfortable and have minimal distractions.",
@@ -31,7 +31,54 @@ window.pageInit = (function () {
       audio: "/Hypno/hypnoobeyfile.mp3",
       downloadUrl: "/Hypno/hypnoobeyfile.wav",
       nsfw: false
+    },    
+    {
+      slug: "hypno-rewrite-trigger",
+      title: "REWRITE Trigger",
+      description: 
+        ["Make sure to listen to the first file before this one, as this uses triggers from that original file. It's shorter than the first file, roughly 10mins <3",
+        "- This file requires u to be comfortable and have minimal distractions.",
+        "- Put your devices on Do Not Disturb, and don't be doing anything other than listen to this file once you click play (no texting or watching videos cutie <3). I recommend having your eyes closed.",
+        "- Headphones are highly recommended.",
+        "- Make sure you are comfortable, either laying on a bed of sitting in a chair with your eyes closed.",
+        "- After listening, I would recommend listening to the file once a day for the next 3 days, and after then once a week, to help them stick long-term. This applies to all my files"],
+      spoilerDescription: "Adds a trigger called REWRITE. When someone says the phrase 'REWRITE', followed by a statement, you will fully believe that statement to be true. (Example; 'REWRITE. Your fav color is purple' will make you believe ur fav color is, and has always been, purple.) This includes altering memories.",
+      tags: ["Hypnosis Audio", "BASE File Triggers Required"],
+      audio: "/Hypno/hypnorewritefile.mp3",
+      downloadUrl: "/Hypno/hypnorewritefile.wav",
+      nsfw: false
     },
+    {
+      slug: "hypno-love-subliminal",
+      title: "Audio-disiac Subliminal",
+      description: 
+      [
+        "You ever want to fall in love with me~? Well now you can! Pop this file on loop and feel your emotions get overwhelmed with my love~",
+        "- The file is 1 minute long, but intended to loop, so please ensure your music player has looping enabled.",
+        "- Please adjust the volume to a comfortable level so you can listen for long periods of time."
+      ],
+      spoilerDescription: "Adds a trigger called REWRITE. When someone says the phrase 'REWRITE', followed by a statement, you will fully believe that statement to be true. (Example; 'REWRITE. Your fav color is purple' will make you believe ur fav color is, and has always been, purple.) This includes altering memories.",
+      tags: ["Subliminal", "Emotion Play", "Love"],
+      audio: "/Hypno/hypnosubliminallove.mp3",
+      downloadUrl: "/Hypno/hypnosubliminallove.wav",
+      nsfw: false
+    },
+    {
+      slug: "hypno-drone-subliminal",
+      title: "Drone Conversion Subliminal",
+      description: 
+      [
+        "Your mind is too ful. Too much thinking. Listen to this and let it turn you into a mindless drone, only existing to serve~",
+        "- The file is 1 minute long, but intended to loop, so please ensure your music player has looping enabled.",
+        "- Please adjust the volume to a comfortable level so you can listen for long periods of time."
+      ],
+      spoilerDescription: "Adds a trigger called REWRITE. When someone says the phrase 'REWRITE', followed by a statement, you will fully believe that statement to be true. (Example; 'REWRITE. Your fav color is purple' will make you believe ur fav color is, and has always been, purple.) This includes altering memories.",
+      tags: ["Subliminal", "Emotion Play", "Love"],
+      audio: "/Hypno/dronesubliminals.mp3",
+      downloadUrl: "/Hypno/dronesubliminals.wav",
+      nsfw: false
+    },
+    
   ];
 
   function resolveAudioUrl(audioPath) {
