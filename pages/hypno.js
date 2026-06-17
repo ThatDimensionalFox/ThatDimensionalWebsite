@@ -138,10 +138,10 @@ window.pageInit = (function () {
   function buildDescriptionPreview(file) {
     const preview = document.createElement('div');
     preview.className = 'relative mt-2 overflow-hidden text-xs leading-5 text-gray-300';
-    preview.style.maxHeight = '4.5rem';
+    preview.style.maxHeight = '5.75rem';
 
     const text = document.createElement('div');
-    text.className = 'pr-4';
+    text.className = 'pr-2 text-center';
     renderDescription(text, file.description || '');
     preview.appendChild(text);
 
@@ -277,21 +277,21 @@ window.pageInit = (function () {
       const card = document.createElement('button');
       const slug = getFileSlug(file);
       card.type = 'button';
-      card.className = 'aspect-square rounded-xl border border-pink-500/30 bg-zinc-900/70 p-3 text-left shadow-lg transition hover:-translate-y-0.5 hover:border-pink-300/60 hover:bg-zinc-800/95 focus:outline-none focus:ring-2 focus:ring-pink-400';
+      card.className = 'min-h-[15rem] rounded-2xl border border-pink-500/30 bg-zinc-900/70 p-4 text-left shadow-lg transition hover:-translate-y-0.5 hover:border-pink-300/60 hover:bg-zinc-800/95 focus:outline-none focus:ring-2 focus:ring-pink-400 sm:min-h-[16rem]';
       card.addEventListener('click', () => setSelectedFileSlug(slug));
 
       const cardInner = document.createElement('div');
-      cardInner.className = 'flex h-full flex-col justify-between gap-3';
+      cardInner.className = 'flex h-full flex-col justify-between gap-4';
 
       const title = document.createElement('h4');
-      title.className = 'text-base font-semibold leading-tight text-pink-100';
+      title.className = 'text-center text-base font-semibold leading-tight text-pink-100';
       title.textContent = file.title || 'Untitled Hypno File';
       cardInner.appendChild(title);
 
       cardInner.appendChild(buildDescriptionPreview(file));
 
       const tagContainer = document.createElement('div');
-      tagContainer.className = 'flex flex-wrap gap-2';
+      tagContainer.className = 'flex flex-wrap justify-center gap-2';
       (file.tags || []).forEach(tag => {
         const badge = document.createElement('span');
         badge.className = 'rounded-full bg-pink-600/20 px-2 py-1 text-[11px] leading-none text-pink-100';
