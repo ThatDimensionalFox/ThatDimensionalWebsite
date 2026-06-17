@@ -215,14 +215,16 @@
   <script>
     const badgePreview = document.getElementById("badgePreview");
     let selectedBadges = [];
+    const MAX_BADGES = 35;
+    const MAX_BADGES_PER_ROW = 7;
 
     const defaultBadgeNames = [
-      "Account_Play.png", "BDSM.png", "Raceplay.png", "Blackmail.png", "Censored.png", 
-      "Chastity.png", "Cucking.png", "Diaper_Play.png", "Feet.png", "Feminization.png", 
-      "Findom.png", "Humiliation.png", "Hypnosis.png", "IRL_Photos.png", "Petplay.png", 
-      "Piss_Play.png", "SadoMaso.png", "Scent_Play.png", "Techdom.png", "TPE.png", 
-      "WombTat.png", "Vore.png", "TF.png", "Somno.png", "Overstim.png", "MILF.png", 
-      "Facesitting.png", "Breathplay.png"
+      "Account_Play.png", "BDSM.png", "Blackmail.png", "Breathplay.png", "Censored.png", 
+      "Chastity.png", "Cucking.png", "Diaper_Play.png", "Facesitting.png", "Feet.png", 
+      "Feminization.png", "Findom.png", "Humiliation.png", "Hypnosis.png", "IRL_Photos.png", 
+      "MILF.png", "Overstim.png", "Petplay.png", "Piss_Play.png", "Raceplay.png", 
+      "SadoMaso.png", "Scent_Play.png", "Somno.png", "Techdom.png", "TF.png", 
+      "TPE.png", "Vore.png", "WombTat.png"
     ];
 
     window.onload = function () {
@@ -448,12 +450,12 @@
               ctx.shadowBlur = 0;
               ctx.fillText("@" + document.getElementById("username").value, 50, canvas.height - 80);
 
-              const badgeSize = 250;
-              selectedBadges.filter(b => b.visible).slice(0, 20).forEach((badge, i) => {
+              const badgeSize = 220;
+              selectedBadges.filter(b => b.visible).slice(0, MAX_BADGES).forEach((badge, i) => {
                 const img = new Image();
                 img.onload = () => {
-                  const row = Math.floor(i / 6);
-                  const col = i % 6;
+                  const row = Math.floor(i / MAX_BADGES_PER_ROW);
+                  const col = i % MAX_BADGES_PER_ROW;
                   const x = 800 + col * (badgeSize + 20);
                   const y = 200 + row * (badgeSize + 20);
                   ctx.drawImage(img, x, y, badgeSize, badgeSize);
