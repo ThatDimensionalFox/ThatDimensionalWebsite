@@ -73,7 +73,7 @@ window.pageInit = (function () {
         "- Please adjust the volume to a comfortable level so you can listen for long periods of time."
       ],
       spoilerDescription: "A subliminal focused on turning the user into a mindless drone, meant to serve.",
-      tags: ["Subliminal", "Emotion Play", "Love"],
+      tags: ["Subliminal", "Drone"],
       audio: "/Hypno/dronesubliminals.mp3",
       downloadUrl: "/Hypno/dronesubliminals.wav",
       nsfw: false
