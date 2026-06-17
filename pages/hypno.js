@@ -3,10 +3,10 @@ window.pageInit = (function () {
     {
       title: "Hypno Standard",
       description: 
-        ["This file requires u to be comfortable and have minimal distractions.<br/>",
-        "Put your devices on Do Not Disturb, and don't be doing anything other than listen to this file once you click play (no texting or watching videos cutie <3). I recommend having your eyes closed.<br/>",
-        "Headphones are highly recommended.<br/>",
-        "Make sure you are comfortable, either laying on a bed of sitting in a chair with your eyes closed.<br/>",
+        ["This file requires u to be comfortable and have minimal distractions.",
+        "Put your devices on Do Not Disturb, and don't be doing anything other than listen to this file once you click play (no texting or watching videos cutie <3). I recommend having your eyes closed.",
+        "Headphones are highly recommended.",
+        "Make sure you are comfortable, either laying on a bed of sitting in a chair with your eyes closed.",
         "After listening, I would recommend listening to the file once a day for the next 3 days, and after then once a week, to help them stick long-term. This applies to all my files"],
       spoilerDescription: ["Spoiler Description"],
       tags: ["Hypnosis Audio", "Drop Trigger"],
@@ -50,7 +50,16 @@ window.pageInit = (function () {
 
       const description = document.createElement('p');
       description.className = 'mt-2 text-sm text-gray-300';
-      description.textContent = file.description || '';
+      if (Array.isArray(file.description)) {
+        file.description.forEach((line, index) => {
+          if (index > 0) {
+            description.appendChild(document.createElement('br'));
+          }
+          description.appendChild(document.createTextNode(line));
+        });
+      } else {
+        description.textContent = file.description || '';
+      }
       card.appendChild(description);
 
       const spoiler = document.createElement('p');
