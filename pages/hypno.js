@@ -3,10 +3,10 @@ window.pageInit = (function () {
     {
       title: "Hypno Standard",
       description: 
-        ["This file requires u to be comfortable and have minimal distractions.<br>",
-        "Put your devices on Do Not Disturb, and don't be doing anything other than listen to this file once you click play (no texting or watching videos cutie <3). I recommend having your eyes closed.<br>",
-        "Headphones are highly recommended.<br>",
-        "Make sure you are comfortable, either laying on a bed of sitting in a chair with your eyes closed.<br>",
+        ["This file requires u to be comfortable and have minimal distractions.<br/>",
+        "Put your devices on Do Not Disturb, and don't be doing anything other than listen to this file once you click play (no texting or watching videos cutie <3). I recommend having your eyes closed.<br/>",
+        "Headphones are highly recommended.<br/>",
+        "Make sure you are comfortable, either laying on a bed of sitting in a chair with your eyes closed.<br/>",
         "After listening, I would recommend listening to the file once a day for the next 3 days, and after then once a week, to help them stick long-term. This applies to all my files"],
       spoilerDescription: ["Spoiler Description"],
       tags: ["Hypnosis Audio", "Drop Trigger"],
