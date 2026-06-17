@@ -1,21 +1,5 @@
 
 <!-- pages/hypno.html -->
-<section data-title="Hypno Files">
-  <header class="mb-4">
-    <h3>Hypno Files</h3>
-    <p class="text-sm text-gray-400">Desc.</p>
-  </header>
-
-  <!-- NSFW toggle (page JS will wire this up) -->
-  <div class="mb-4">
-    <button id="nsfw-toggle" type="button"
-            class="px-3 py-1 rounded bg-pink-600 text-white focus:outline-none focus:ring">
-      Show NSFW
-    </button>
-  </div>
-
-  <!-- hypno files placeholder - hypno.js will fill this -->
-  <div id="hypno-container" class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-6" aria-live="polite">
-    <!-- thumbnails inserted here -->
-  </div>
+<section data-title="Hypno Files" class="min-h-screen">
+  <div id="hypno-container" class="min-h-screen" aria-live="polite"></div>
 </section>

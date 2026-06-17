@@ -13,7 +13,8 @@
   function parseRoute() {
     // location.hash looks like "#/gallery" or "" -> fall back to default
     const raw = (location.hash || '').replace(/^#\/?/, '');
-    return raw ? raw.split('/')[0] : defaultRoute;
+    const routePart = raw ? raw.split('?')[0] : '';
+    return routePart ? routePart.split('/')[0] : defaultRoute;
   }
 
   function getSiteBasePath() {

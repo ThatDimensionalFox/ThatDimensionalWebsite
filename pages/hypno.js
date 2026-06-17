@@ -1,6 +1,7 @@
 window.pageInit = (function () {
   const hypnoFiles = [
     {
+      slug: "hypno-standard",
       title: "Hypno Standard",
       description: 
         ["Welcome to my first hypno file~ This file will act as a basis for the rest of my hypnosis files, as they will use the triggers from this file ^~^",
@@ -16,6 +17,7 @@ window.pageInit = (function () {
       nsfw: false
     },
     {
+      slug: "hypno-obey-trigger",
       title: "Hypno OBEY Trigger",
       description: 
         ["Make sure to listen to the first file before this one, as this uses triggers from that original file. It's shorter than the first file, roughly 10mins <3",
@@ -29,10 +31,8 @@ window.pageInit = (function () {
       audio: "/Hypno/hypnoobeyfile.mp3",
       downloadUrl: "/Hypno/hypnoobeyfile.wav",
       nsfw: false
-    }
+    },
   ];
-
-  let showNSFW = false;
 
   function resolveAudioUrl(audioPath) {
     if (!audioPath) return '';
@@ -46,110 +46,221 @@ window.pageInit = (function () {
     return filePath.startsWith('/') ? filePath : `/${filePath.replace(/^\.\//, '')}`;
   }
 
+  function slugify(value) {
+    return String(value || '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  }
+
+  function getSelectedFileSlug() {
+    const hash = location.hash || '';
+    const queryIndex = hash.indexOf('?');
+    if (queryIndex === -1) return '';
+    const params = new URLSearchParams(hash.slice(queryIndex + 1));
+    return params.get('file') || '';
+  }
+
+  function setSelectedFileSlug(slug) {
+    const nextHash = `#/hypno?file=${encodeURIComponent(slug)}`;
+    if (location.hash !== nextHash) {
+      location.hash = nextHash;
+    }
+  }
+
+  function clearSelectedFileSlug() {
+    if (location.hash !== '#/hypno') {
+      location.hash = '#/hypno';
+    }
+  }
+
+  function renderDescription(target, value) {
+    if (Array.isArray(value)) {
+      value.forEach((line, index) => {
+        if (index > 0) {
+          target.appendChild(document.createElement('br'));
+        }
+        target.appendChild(document.createTextNode(line));
+      });
+      return;
+    }
+
+    target.textContent = value || '';
+  }
+
+  function buildDescriptionPreview(file) {
+    const preview = document.createElement('div');
+    preview.className = 'relative mt-2 overflow-hidden text-xs leading-5 text-gray-300';
+    preview.style.maxHeight = '4.5rem';
+
+    const text = document.createElement('div');
+    text.className = 'pr-4';
+    renderDescription(text, file.description || '');
+    preview.appendChild(text);
+
+    const fade = document.createElement('div');
+    fade.className = 'pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-zinc-900/95 to-transparent';
+    preview.appendChild(fade);
+
+    return preview;
+  }
+
+  function getFileSlug(file) {
+    return file.slug || slugify(file.title);
+  }
+
+  function buildFileDetails(file) {
+    const details = document.createElement('article');
+    details.className = 'w-full rounded-3xl border border-pink-500/30 bg-zinc-900/80 p-6 shadow-2xl sm:p-8';
+
+    const heading = document.createElement('h4');
+    heading.className = 'text-2xl font-semibold text-pink-100 sm:text-3xl';
+    heading.textContent = file.title || 'Untitled Hypno File';
+    details.appendChild(heading);
+
+    const description = document.createElement('p');
+    description.className = 'mt-4 text-sm leading-7 text-gray-300 sm:text-base';
+    renderDescription(description, file.description || '');
+    details.appendChild(description);
+
+    const spoiler = document.createElement('p');
+    spoiler.className = 'mt-4 text-sm leading-7 text-amber-200/90 sm:text-base';
+    renderDescription(spoiler, file.spoilerDescription || '');
+    details.appendChild(spoiler);
+
+    const tagContainer = document.createElement('div');
+    tagContainer.className = 'mt-5 flex flex-wrap gap-2';
+    (file.tags || []).forEach(tag => {
+      const badge = document.createElement('span');
+      badge.className = 'rounded-full bg-pink-600/20 px-2 py-1 text-xs text-pink-100';
+      badge.textContent = tag;
+      tagContainer.appendChild(badge);
+    });
+    details.appendChild(tagContainer);
+
+    const audioWrap = document.createElement('div');
+    audioWrap.className = 'mt-6';
+    const audio = document.createElement('audio');
+    audio.controls = true;
+    audio.preload = 'metadata';
+    audio.className = 'w-full';
+    const resolvedAudioUrl = resolveAudioUrl(file.audio);
+    audio.src = resolvedAudioUrl;
+    const source = document.createElement('source');
+    source.src = resolvedAudioUrl;
+    source.type = resolvedAudioUrl.toLowerCase().endsWith('.mp3') ? 'audio/mpeg' : 'audio/wav';
+    audio.appendChild(source);
+    audioWrap.appendChild(audio);
+    details.appendChild(audioWrap);
+
+    const downloadUrl = resolveFileUrl(file.downloadUrl || file.audio);
+    if (downloadUrl) {
+      const downloadWrap = document.createElement('div');
+      downloadWrap.className = 'mt-4';
+
+      const downloadLink = document.createElement('a');
+      downloadLink.href = downloadUrl;
+      downloadLink.download = '';
+      downloadLink.target = '_blank';
+      downloadLink.rel = 'noopener noreferrer';
+      downloadLink.className = 'inline-flex items-center rounded-md border border-pink-400/40 bg-pink-500/15 px-3 py-1.5 text-sm font-medium text-pink-100 transition hover:bg-pink-500/25';
+      downloadLink.textContent = 'Download';
+
+      downloadWrap.appendChild(downloadLink);
+      details.appendChild(downloadWrap);
+    }
+
+    return details;
+  }
+
+  function buildBackButton() {
+    const backButton = document.createElement('button');
+    backButton.type = 'button';
+    backButton.className = 'mb-5 inline-flex items-center gap-2 rounded-full border border-pink-500/30 bg-zinc-900/80 px-4 py-2 text-sm font-medium text-pink-100 shadow-lg transition hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-pink-400';
+
+    const icon = document.createElement('span');
+    icon.className = 'text-lg leading-none';
+    icon.textContent = '←';
+    backButton.appendChild(icon);
+
+    const label = document.createElement('span');
+    label.textContent = 'Back';
+    backButton.appendChild(label);
+
+    backButton.addEventListener('click', clearSelectedFileSlug);
+    return backButton;
+  }
+
   function generateHypnoFiles() {
     const container = document.getElementById('hypno-container');
     if (!container) return;
 
     container.innerHTML = '';
     container.dataset.ready = 'true';
-    const filesToShow = showNSFW ? hypnoFiles : hypnoFiles.filter(file => !file.nsfw);
+    const filesToShow = hypnoFiles.filter(file => !file.nsfw);
+    const selectedSlug = getSelectedFileSlug();
+    const selectedFile = selectedSlug ? filesToShow.find(file => getFileSlug(file) === selectedSlug) || null : null;
+
+    if (selectedFile) {
+      container.className = 'min-h-screen bg-transparent px-4 py-4 sm:px-6 lg:px-8';
+
+      const shell = document.createElement('div');
+      shell.className = 'mx-auto flex min-h-[calc(100vh-2rem)] max-w-5xl flex-col';
+
+      shell.appendChild(buildBackButton());
+      shell.appendChild(buildFileDetails(selectedFile));
+      container.appendChild(shell);
+      if (document.title !== `${selectedFile.title} — ThatDimensionalWebsite`) {
+        document.title = `${selectedFile.title} — ThatDimensionalWebsite`;
+      }
+      const titleEl = document.getElementById('page-title');
+      if (titleEl) titleEl.textContent = selectedFile.title || 'Hypno Files';
+      return;
+    }
+
+    container.className = 'min-h-screen px-4 py-4 sm:px-6 lg:px-8';
+    document.title = 'Hypno Files — ThatDimensionalWebsite';
+    const titleEl = document.getElementById('page-title');
+    if (titleEl) titleEl.textContent = 'Hypno Files';
+
+    const grid = document.createElement('div');
+    grid.className = 'grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5';
 
     filesToShow.forEach(file => {
-      const card = document.createElement('article');
-      card.className = 'rounded-lg border border-pink-500/30 bg-zinc-900/70 p-4 shadow-lg';
+      const card = document.createElement('button');
+      const slug = getFileSlug(file);
+      card.type = 'button';
+      card.className = 'aspect-square rounded-xl border border-pink-500/30 bg-zinc-900/70 p-3 text-left shadow-lg transition hover:-translate-y-0.5 hover:border-pink-300/60 hover:bg-zinc-800/95 focus:outline-none focus:ring-2 focus:ring-pink-400';
+      card.addEventListener('click', () => setSelectedFileSlug(slug));
+
+      const cardInner = document.createElement('div');
+      cardInner.className = 'flex h-full flex-col justify-between gap-3';
 
       const title = document.createElement('h4');
-      title.className = 'font-semibold text-lg text-pink-200';
+      title.className = 'text-base font-semibold leading-tight text-pink-100';
       title.textContent = file.title || 'Untitled Hypno File';
-      card.appendChild(title);
+      cardInner.appendChild(title);
 
-      const description = document.createElement('p');
-      description.className = 'mt-2 text-sm text-gray-300';
-      if (Array.isArray(file.description)) {
-        file.description.forEach((line, index) => {
-          if (index > 0) {
-            description.appendChild(document.createElement('br'));
-          }
-          description.appendChild(document.createTextNode(line));
-        });
-      } else {
-        description.textContent = file.description || '';
-      }
-      card.appendChild(description);
-
-      const spoiler = document.createElement('p');
-      spoiler.className = 'mt-2 text-sm text-amber-200/90';
-      spoiler.textContent = file.spoilerDescription || '';
-      card.appendChild(spoiler);
+      cardInner.appendChild(buildDescriptionPreview(file));
 
       const tagContainer = document.createElement('div');
-      tagContainer.className = 'mt-3 flex flex-wrap gap-2';
+      tagContainer.className = 'flex flex-wrap gap-2';
       (file.tags || []).forEach(tag => {
         const badge = document.createElement('span');
-        badge.className = 'rounded-full bg-pink-600/20 px-2 py-1 text-xs text-pink-100';
+        badge.className = 'rounded-full bg-pink-600/20 px-2 py-1 text-[11px] leading-none text-pink-100';
         badge.textContent = tag;
         tagContainer.appendChild(badge);
       });
-      card.appendChild(tagContainer);
+      cardInner.appendChild(tagContainer);
 
-      const audioWrap = document.createElement('div');
-      audioWrap.className = 'mt-4';
-      const audio = document.createElement('audio');
-      audio.controls = true;
-      audio.preload = 'metadata';
-      audio.className = 'w-full';
-      const resolvedAudioUrl = resolveAudioUrl(file.audio);
-      audio.src = resolvedAudioUrl;
-      const source = document.createElement('source');
-      source.src = resolvedAudioUrl;
-      source.type = resolvedAudioUrl.toLowerCase().endsWith('.mp3') ? 'audio/mpeg' : 'audio/wav';
-      audio.appendChild(source);
-
-      audioWrap.appendChild(audio);
-      card.appendChild(audioWrap);
-
-      const downloadUrl = resolveFileUrl(file.downloadUrl || file.audio);
-      if (downloadUrl) {
-        const downloadWrap = document.createElement('div');
-        downloadWrap.className = 'mt-3';
-
-        const downloadLink = document.createElement('a');
-        downloadLink.href = downloadUrl;
-        downloadLink.download = '';
-        downloadLink.target = '_blank';
-        downloadLink.rel = 'noopener noreferrer';
-        downloadLink.className = 'inline-flex items-center rounded-md border border-pink-400/40 bg-pink-500/15 px-3 py-1.5 text-sm font-medium text-pink-100 transition hover:bg-pink-500/25';
-        downloadLink.textContent = 'Download';
-
-        downloadWrap.appendChild(downloadLink);
-        card.appendChild(downloadWrap);
-      }
-
-      container.appendChild(card);
+      card.appendChild(cardInner);
+      grid.appendChild(card);
     });
-  }
 
-  function toggleNSFW() {
-    showNSFW = !showNSFW;
-    updateToggleText();
-    generateHypnoFiles();
-    return showNSFW;
-  }
-
-  function updateToggleText() {
-    const btn = document.getElementById('nsfw-toggle');
-    if (!btn) return;
-    btn.textContent = showNSFW ? 'Hide NSFW' : 'Show NSFW';
+    container.appendChild(grid);
   }
 
   return function pageInit() {
-    const toggleBtn = document.getElementById('nsfw-toggle');
-    if (toggleBtn) {
-      toggleBtn.removeEventListener('click', toggleNSFW);
-      toggleBtn.addEventListener('click', toggleNSFW);
-      updateToggleText();
-    }
-
     generateHypnoFiles();
   };
 })();
