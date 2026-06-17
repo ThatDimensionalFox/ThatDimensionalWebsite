@@ -57,7 +57,7 @@ window.pageInit = (function () {
         "- The file is 1 minute long, but intended to loop, so please ensure your music player has looping enabled.",
         "- Please adjust the volume to a comfortable level so you can listen for long periods of time."
       ],
-      spoilerDescription: "Adds a trigger called REWRITE. When someone says the phrase 'REWRITE', followed by a statement, you will fully believe that statement to be true. (Example; 'REWRITE. Your fav color is purple' will make you believe ur fav color is, and has always been, purple.) This includes altering memories.",
+      spoilerDescription: "A subliminal focused on making the listener fall in love, and become obsessed, with me.",
       tags: ["Subliminal", "Emotion Play", "Love"],
       audio: "/Hypno/hypnosubliminallove.mp3",
       downloadUrl: "/Hypno/hypnosubliminallove.wav",
@@ -72,7 +72,7 @@ window.pageInit = (function () {
         "- The file is 1 minute long, but intended to loop, so please ensure your music player has looping enabled.",
         "- Please adjust the volume to a comfortable level so you can listen for long periods of time."
       ],
-      spoilerDescription: "Adds a trigger called REWRITE. When someone says the phrase 'REWRITE', followed by a statement, you will fully believe that statement to be true. (Example; 'REWRITE. Your fav color is purple' will make you believe ur fav color is, and has always been, purple.) This includes altering memories.",
+      spoilerDescription: "A subliminal focused on turning the user into a mindless drone, meant to serve.",
       tags: ["Subliminal", "Emotion Play", "Love"],
       audio: "/Hypno/dronesubliminals.mp3",
       downloadUrl: "/Hypno/dronesubliminals.wav",
