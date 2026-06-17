@@ -3,23 +3,32 @@ window.pageInit = (function () {
     {
       title: "Hypno Standard",
       description: 
-        ["This file requires u to be comfortable and have minimal distractions.",
-        "Put your devices on Do Not Disturb, and don't be doing anything other than listen to this file once you click play (no texting or watching videos cutie <3). I recommend having your eyes closed.",
-        "Headphones are highly recommended.",
-        "Make sure you are comfortable, either laying on a bed of sitting in a chair with your eyes closed.",
-        "After listening, I would recommend listening to the file once a day for the next 3 days, and after then once a week, to help them stick long-term. This applies to all my files"],
-      spoilerDescription: ["Spoiler Description"],
+        ["Welcome to my first hypno file~ This file will act as a basis for the rest of my hypnosis files, as they will use the triggers from this file ^~^",
+        "- This file requires u to be comfortable and have minimal distractions.",
+        "- Put your devices on Do Not Disturb, and don't be doing anything other than listen to this file once you click play (no texting or watching videos cutie <3). I recommend having your eyes closed.",
+        "- Headphones are highly recommended.",
+        "- Make sure you are comfortable, either laying on a bed of sitting in a chair with your eyes closed.",
+        "- After listening, I would recommend listening to the file once a day for the next 3 days, and after then once a week, to help them stick long-term. This applies to all my files"],
+      spoilerDescription: ["This file gives u three triggers; a safeword (for getting out of trance/pausing triggers), a Drop trigger (for dropping you into trance. This trigger can only be used by people you trust) and a Wake Up trigger (to bring you up and out of trance)  "],
       tags: ["Hypnosis Audio", "Drop Trigger"],
       audio: "/Hypno/hypnostandardfile.mp3",
+      downloadUrl: "/Hypno/hypnostandardfile.wav",
       nsfw: false
     },
     {
-      title: "test",
-      description: "this is me testing.",
-      spoilerDescription: "test description.",
-      tags: ["stuff!", "things too!"],
-      audio: "/Hypno/test.mp3",
-      nsfw: true
+      title: "Hypno OBEY Trigger",
+      description: 
+        ["Make sure to listen to the first file before this one, as this uses triggers from that original file. It's shorter than the first file, roughly 10mins <3",
+        "- This file requires u to be comfortable and have minimal distractions.",
+        "- Put your devices on Do Not Disturb, and don't be doing anything other than listen to this file once you click play (no texting or watching videos cutie <3). I recommend having your eyes closed.",
+        "- Headphones are highly recommended.",
+        "- Make sure you are comfortable, either laying on a bed of sitting in a chair with your eyes closed.",
+        "- After listening, I would recommend listening to the file once a day for the next 3 days, and after then once a week, to help them stick long-term. This applies to all my files"],
+      spoilerDescription: "Adds a trigger called OBEY. When someone says the phrase OBEY followed by any command, you will feel compelled to obey that command. Trying to resist it will make it stronger. You will recieve a spike of pleasure upon completing the command.",
+      tags: ["Hypnosis Audio", "BASE File Triggers Required"],
+      audio: "/Hypno/hypnoobeyfile.mp3",
+      downloadUrl: "/Hypno/hypnoobeyfile.wav",
+      nsfw: false
     }
   ];
 
@@ -29,6 +38,12 @@ window.pageInit = (function () {
     if (!audioPath) return '';
     if (/^(https?:)?\/\//i.test(audioPath)) return audioPath;
     return audioPath.startsWith('/') ? audioPath : `/${audioPath.replace(/^\.\//, '')}`;
+  }
+
+  function resolveFileUrl(filePath) {
+    if (!filePath) return '';
+    if (/^(https?:)?\/\//i.test(filePath)) return filePath;
+    return filePath.startsWith('/') ? filePath : `/${filePath.replace(/^\.\//, '')}`;
   }
 
   function generateHypnoFiles() {
@@ -92,6 +107,23 @@ window.pageInit = (function () {
 
       audioWrap.appendChild(audio);
       card.appendChild(audioWrap);
+
+      const downloadUrl = resolveFileUrl(file.downloadUrl || file.audio);
+      if (downloadUrl) {
+        const downloadWrap = document.createElement('div');
+        downloadWrap.className = 'mt-3';
+
+        const downloadLink = document.createElement('a');
+        downloadLink.href = downloadUrl;
+        downloadLink.download = '';
+        downloadLink.target = '_blank';
+        downloadLink.rel = 'noopener noreferrer';
+        downloadLink.className = 'inline-flex items-center rounded-md border border-pink-400/40 bg-pink-500/15 px-3 py-1.5 text-sm font-medium text-pink-100 transition hover:bg-pink-500/25';
+        downloadLink.textContent = 'Download';
+
+        downloadWrap.appendChild(downloadLink);
+        card.appendChild(downloadWrap);
+      }
 
       container.appendChild(card);
     });
