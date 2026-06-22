@@ -212,6 +212,30 @@ window.pageInit = (function () {
     }
   }
 
+  async function prepareDownloadLink(downloadLink, downloadUrl, audioUrl) {
+    try {
+      const filename = getDownloadFilename(downloadUrl || audioUrl);
+      const blob = await buildDownloadBlob(downloadUrl || audioUrl, audioUrl || downloadUrl);
+      const objectUrl = URL.createObjectURL(blob);
+
+      downloadLink.href = objectUrl;
+      downloadLink.download = filename;
+      downloadLink.dataset.objectUrl = objectUrl;
+      downloadLink.dataset.ready = 'true';
+      downloadLink.setAttribute('aria-disabled', 'false');
+      downloadLink.classList.remove('pointer-events-none', 'opacity-60');
+      downloadLink.textContent = 'Download';
+    } catch (error) {
+      console.error('Download preparation failed', error);
+      downloadLink.href = downloadUrl;
+      downloadLink.download = getDownloadFilename(downloadUrl);
+      downloadLink.dataset.ready = 'true';
+      downloadLink.setAttribute('aria-disabled', 'false');
+      downloadLink.classList.remove('pointer-events-none', 'opacity-60');
+      downloadLink.textContent = 'Download';
+    }
+  }
+
   function slugify(value) {
     return String(value || '')
       .toLowerCase()
@@ -329,15 +353,10 @@ window.pageInit = (function () {
       downloadLink.download = getDownloadFilename(downloadUrl);
       downloadLink.target = '_blank';
       downloadLink.rel = 'noopener noreferrer';
-      downloadLink.className = 'inline-flex items-center rounded-md border border-pink-400/40 bg-pink-500/15 px-3 py-1.5 text-sm font-medium text-pink-100 transition hover:bg-pink-500/25';
-      downloadLink.textContent = 'Download';
-      downloadLink.addEventListener('click', event => {
-        event.preventDefault();
-        void downloadFile(downloadUrl, resolveAudioUrl(file.audio)).catch(error => {
-          console.error('Download failed', error);
-          window.location.assign(downloadUrl);
-        });
-      });
+      downloadLink.className = 'inline-flex items-center rounded-md border border-pink-400/40 bg-pink-500/15 px-3 py-1.5 text-sm font-medium text-pink-100 transition hover:bg-pink-500/25 pointer-events-none opacity-60';
+      downloadLink.textContent = 'Preparing download...';
+      downloadLink.setAttribute('aria-disabled', 'true');
+      void prepareDownloadLink(downloadLink, downloadUrl, resolveAudioUrl(file.audio));
 
       downloadWrap.appendChild(downloadLink);
       details.appendChild(downloadWrap);
