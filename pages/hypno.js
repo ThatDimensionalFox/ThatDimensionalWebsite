@@ -93,6 +93,125 @@ window.pageInit = (function () {
     return filePath.startsWith('/') ? filePath : `/${filePath.replace(/^\.\//, '')}`;
   }
 
+  function getDownloadFilename(filePath) {
+    const baseName = String(filePath || '')
+      .split('/')
+      .pop()
+      || 'download.wav';
+
+    return baseName.replace(/\.(mp3|wav)$/i, '.wav');
+  }
+
+  function writeAscii(view, offset, value) {
+    for (let index = 0; index < value.length; index += 1) {
+      view.setUint8(offset + index, value.charCodeAt(index));
+    }
+  }
+
+  function encodeAudioBufferToWav(audioBuffer) {
+    const channelCount = Math.max(1, audioBuffer.numberOfChannels);
+    const sampleRate = audioBuffer.sampleRate;
+    const sampleCount = audioBuffer.length;
+    const bytesPerSample = 2;
+    const blockAlign = channelCount * bytesPerSample;
+    const dataSize = sampleCount * blockAlign;
+    const buffer = new ArrayBuffer(44 + dataSize);
+    const view = new DataView(buffer);
+
+    writeAscii(view, 0, 'RIFF');
+    view.setUint32(4, 36 + dataSize, true);
+    writeAscii(view, 8, 'WAVE');
+    writeAscii(view, 12, 'fmt ');
+    view.setUint32(16, 16, true);
+    view.setUint16(20, 1, true);
+    view.setUint16(22, channelCount, true);
+    view.setUint32(24, sampleRate, true);
+    view.setUint32(28, sampleRate * blockAlign, true);
+    view.setUint16(32, blockAlign, true);
+    view.setUint16(34, 16, true);
+    writeAscii(view, 36, 'data');
+    view.setUint32(40, dataSize, true);
+
+    const channels = [];
+    for (let channel = 0; channel < channelCount; channel += 1) {
+      channels.push(audioBuffer.getChannelData(channel));
+    }
+
+    let offset = 44;
+    for (let sampleIndex = 0; sampleIndex < sampleCount; sampleIndex += 1) {
+      for (let channel = 0; channel < channelCount; channel += 1) {
+        const value = Math.max(-1, Math.min(1, channels[channel][sampleIndex]));
+        view.setInt16(offset, value < 0 ? value * 0x8000 : value * 0x7fff, true);
+        offset += 2;
+      }
+    }
+
+    return new Blob([buffer], { type: 'audio/wav' });
+  }
+
+  function looksLikeGitLfsPointer(text) {
+    const normalized = String(text || '').trim();
+    return normalized.startsWith('version https://git-lfs.github.com/spec/v1');
+  }
+
+  async function buildDownloadBlob(downloadUrl, audioUrl) {
+    const response = await fetch(downloadUrl, { cache: 'no-store' });
+    if (!response.ok) {
+      throw new Error(`Failed to fetch ${downloadUrl}: ${response.status}`);
+    }
+
+    const contentType = response.headers.get('content-type') || '';
+    const downloadedBlob = await response.blob();
+
+    if (!contentType.includes('text/plain') && downloadedBlob.size >= 1024) {
+      return downloadedBlob;
+    }
+
+    const pointerText = await downloadedBlob.text();
+    if (!looksLikeGitLfsPointer(pointerText)) {
+      return downloadedBlob;
+    }
+
+    const audioResponse = await fetch(audioUrl, { cache: 'no-store' });
+    if (!audioResponse.ok) {
+      throw new Error(`Failed to fetch ${audioUrl}: ${audioResponse.status}`);
+    }
+
+    const audioArrayBuffer = await audioResponse.arrayBuffer();
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) {
+      throw new Error('Web Audio API is unavailable');
+    }
+
+    const audioContext = new AudioContextClass();
+    try {
+      const decodedAudio = await audioContext.decodeAudioData(audioArrayBuffer.slice(0));
+      return encodeAudioBufferToWav(decodedAudio);
+    } finally {
+      if (typeof audioContext.close === 'function') {
+        audioContext.close().catch(() => {});
+      }
+    }
+  }
+
+  async function downloadFile(downloadUrl, audioUrl) {
+    const filename = getDownloadFilename(downloadUrl || audioUrl);
+    const blob = await buildDownloadBlob(downloadUrl || audioUrl, audioUrl || downloadUrl);
+    const objectUrl = URL.createObjectURL(blob);
+
+    try {
+      const tempLink = document.createElement('a');
+      tempLink.href = objectUrl;
+      tempLink.download = filename;
+      tempLink.rel = 'noopener noreferrer';
+      document.body.appendChild(tempLink);
+      tempLink.click();
+      tempLink.remove();
+    } finally {
+      window.setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
+    }
+  }
+
   function slugify(value) {
     return String(value || '')
       .toLowerCase()
@@ -207,11 +326,18 @@ window.pageInit = (function () {
 
       const downloadLink = document.createElement('a');
       downloadLink.href = downloadUrl;
-      downloadLink.download = '';
+      downloadLink.download = getDownloadFilename(downloadUrl);
       downloadLink.target = '_blank';
       downloadLink.rel = 'noopener noreferrer';
       downloadLink.className = 'inline-flex items-center rounded-md border border-pink-400/40 bg-pink-500/15 px-3 py-1.5 text-sm font-medium text-pink-100 transition hover:bg-pink-500/25';
       downloadLink.textContent = 'Download';
+      downloadLink.addEventListener('click', event => {
+        event.preventDefault();
+        void downloadFile(downloadUrl, resolveAudioUrl(file.audio)).catch(error => {
+          console.error('Download failed', error);
+          window.location.assign(downloadUrl);
+        });
+      });
 
       downloadWrap.appendChild(downloadLink);
       details.appendChild(downloadWrap);
