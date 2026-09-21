@@ -6,6 +6,30 @@ window.pageInit = (function () {
   // gallery data (use image paths relative to index.html)
   const galleryImages = [
     { 
+      src: 'images/NSFW/lilcupid-drone-face.png', 
+      title: 'Rem Drone Suit', 
+      artist: 'Lilcupid', 
+      artistLink: 'https://bsky.app/profile/lilcupid.bsky.social', 
+      description: "Don't resist your new form. You are now, and have always been, a toy. Accept it~", 
+      nsfw: true 
+    },
+    { 
+      src: 'images/NSFW/naughtyswirls-hypno.png', 
+      title: 'Rem Hypno Visor', 
+      artist: 'NaughtySwirls', 
+      artistLink: 'https://naughtyswirls.carrd.co/', 
+      description: "It's so easy to sink when the spirals are all you can see~", 
+      nsfw: true 
+    },
+    { 
+      src: 'images/NSFW/lovelock-rempaws.png', 
+      title: 'Lovelock Paw art', 
+      artist: 'Lovelock', 
+      artistLink: 'https://lovelockart.carrd.co/', 
+      description: "Go on, give my paws a lick~", 
+      nsfw: true 
+    },
+    { 
       src: 'images/bethany-giftpfp.png', 
       title: 'Rem PFP Art', 
       artist: 'BethanyGC', 
