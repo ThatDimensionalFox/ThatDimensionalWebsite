@@ -6,6 +6,14 @@ window.pageInit = (function () {
   // gallery data (use image paths relative to index.html)
   const galleryImages = [
     { 
+      src: 'images/NSFW/gapsy-remandmell.png', 
+      title: 'Rem + Mel', 
+      artist: 'Gapsy', 
+      artistLink: 'https://gapsy.carrd.co/', 
+      description: "Do you like my new toy~? I think shes lovely... and she'll be even better once that mind is wiped clean~", 
+      nsfw: true 
+    },
+    { 
       src: 'images/NSFW/lilcupid-drone-face.png', 
       title: 'Rem Drone Suit', 
       artist: 'Lilcupid', 
